@@ -4,8 +4,8 @@
 create table db_user(
 	id serial not null,
 	role char(20) not null,
-	name varchar(20) not null,
-	email varchar(20) not null unique,
+	name varchar(40) not null,
+	email varchar(40) not null unique,
 	primary key(id)
 );
 
