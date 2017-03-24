@@ -35,8 +35,18 @@ router.get('/meals/:id', function (req, res) {
             res.status(500).json(err);
         }
         else if (meals[0]){
-            //TODO: Add ingredients to query
-            res.status(200).json(meals[0]);
+            var query = 'SELECT name, count FROM "Project".ingredient_for as ingfor, "Project".food as f WHERE f.id = ingfor.food_id AND ingfor.meal_id = $1';
+            var params = [req.params.id];
+            db(query, params, function (err, ingredients) {
+                if(err){
+                    res.status(500).json(err);
+                }
+                else{
+                    var meal = meals[0];
+                    meal.ingredients = ingredients;
+                    res.status(200).json(meal);
+                }
+            });
         }
         else{
             res.status(404).json({'Error': '404 Not Found'});

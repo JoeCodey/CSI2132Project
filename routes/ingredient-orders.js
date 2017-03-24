@@ -31,13 +31,21 @@ router.get('/ingredient-orders', function (req, res) {
 });
 
 router.get('/ingredient-orders/:id', function (req, res) {
-    //TODO: Get Order contains for this order
     db('SELECT * FROM "Project".ingredient_order WHERE ID = $1', [req.params.id], function (err, results) {
         if(err){
             res.status(500).json(err);
         }
         else if (results[0]){
-            res.status(200).json(results[0]);
+            var query = 'SELECT name, count FROM "Project".order_contains as o, "Project".food as f WHERE f.id = o.food_id AND o.order_id = $1';
+            db(query, [req.params.id], function (req, results2) {
+                if (err){
+                    res.status(500).json(err);
+                }
+                else{
+                    var result = results[0];
+                    result.ingredients = results2;
+                }
+            });
         }
         else{
             res.status(404).json({'Error': '404: Not Found'});

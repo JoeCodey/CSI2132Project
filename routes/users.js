@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('../functions/db');
 var query = require('../functions/query');
 var passport = require('passport');
+var crypt = require('../functions/crypt');
 
 router.post('/signup', function (req, res) {
     if(req.body.email && req.body.name && req.body.password){
@@ -14,18 +15,28 @@ router.post('/signup', function (req, res) {
                 res.status(409).json({'Error': 'Conflicting Email'});
             }
             else{
-                var params = [req.body.email, req.body.password, req.body.name];
-                db('INSERT INTO "Project".db_user (email, password, name) VALUES ($1, $2, $3)', params, function (err) {
-                    if (err){
-                        res.status(500).json(err);
+                crypt.hash(req.body.password, function (err, hash) {
+                    if(err){
+                        throw err;
+                        res.status(400).json({'Error': 'Invalid Password'});
                     }
                     else{
-                        passport.authenticate('local')(req, res, function () {
-                            console.log('Here');
-                            res.status(201).json(req.user);
+                        var params = [req.body.email, hash, req.body.name];
+                        db('INSERT INTO "Project".db_user (email, password, name) VALUES ($1, $2, $3)', params, function (err) {
+                            if (err){
+                                res.status(500).json(err);
+                            }
+                            else{
+                                passport.authenticate('local')(req, res, function () {
+                                    console.log('Here');
+                                    res.status(201).json(req.user);
+                                });
+                            }
                         });
                     }
+
                 });
+
             }
         });
     }
@@ -33,12 +44,6 @@ router.post('/signup', function (req, res) {
         res.status(400).json({'Error': 'Missing Required Fields'});
     }
 });
-/*
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/success',
-    failureRedirect: '/failure'
-}));
-*/
 router.post('/login', passport.authenticate('local'), function (req, res) {
     if(req.user){
         res.status(200).json(req.user);
@@ -47,11 +52,14 @@ router.post('/login', passport.authenticate('local'), function (req, res) {
         res.status(401).json({'Message': 'Username or email not found'});
     }
 });
-router.get('/success', function (req, res) {
-    res.status(200).json({'Message': 'Success'});
-});
-router.get('/failure', function (req, res) {
-    res.status(401).json({'Message': 'Failure'});
+
+router.get('/auth', function (req, res) {
+    if (req.user){
+        res.status(200).json(req.user);
+    }
+    else{
+        res.status(200).json(null);
+    }
 });
 
 router.get('/users', function (req, res) {
@@ -75,19 +83,6 @@ router.get('/users/:id', function (req, res) {
         }
         else{
           res.status(404).json({'Error': '404: Not Found'});
-        }
-    });
-});
-
-router.post('/users', function (req, res) {
-    var params = [req.body.email, req.body.role, req.body.name];
-    console.log(params);
-    db('INSERT INTO "Project".db_user (email, role, name) VALUES ($1, $2, $3)', params, function (err) {
-        if (err){
-            res.status(500).json(err);
-        }
-        else{
-            res.status(201).json({'Message': 'Created'});
         }
     });
 });

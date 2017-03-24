@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var db = require('./functions/db');
+var crypt = require('./functions/crypt');
 
 //var index = require('./routes/index');
 var users = require('./routes/users');
@@ -23,7 +24,6 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 passport.serializeUser(function (user, done) {
-    console.log('Here');
     done(null, user.id);
 });
 passport.deserializeUser(function (id, done) {
@@ -31,23 +31,31 @@ passport.deserializeUser(function (id, done) {
         if (err){
             throw err;
         }
-        console.log('Here');
         done(err, results[0]);
     });
 });
 var LocalStrategy = new require('passport-local').Strategy;
 passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password'}, function (username, password, done) {
-    console.log('Here');
-    var params = [username, password];
-    db('SELECT * FROM "Project".db_user WHERE email = $1 AND password = $2', params, function (err, results ) {
+    var params = [username];
+    db('SELECT * FROM "Project".db_user WHERE email = $1', params, function (err, results ) {
         if (err){
             throw err;
         }
-        console.log('Here');
         if(results.length == 0){
             return done(null, false, 'User with email password combination not found');
         }
-        return done(null, results[0]);
+        var result = results[0];
+        crypt.compare(result.password, password, function (err, isMatch) {
+            if(err){
+                throw err;
+            }
+            else if (isMatch){
+                done(null, results[0]);
+            }
+            else{
+                done(null, false, 'User with email password combination not found');
+            }
+        });
     });
 }));
 app.use(logger('dev'));
