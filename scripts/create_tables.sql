@@ -58,6 +58,7 @@ create table ingredient_order(
 create table order_contains(
 	order_id integer,
 	food_id integer,
+	count integer not null default 1,
 	primary key (order_id, food_id),
 	foreign key (order_id) references ingredient_order(id)
 	on update cascade on delete cascade,
