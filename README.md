@@ -5,6 +5,16 @@ This web-app uses Node.js as a runtime environment, Express.js for API routing, 
 ### Dependencies
 - Node.js v6.0 or higher https://nodejs.org/en/
 - Node Package Manager (npm) v3.0 or higher. (Packaged with node)
+- Angular Command Line Interface v2.0 or higher. 
+Make sure you have these by running the following:
+```
+node --version
+npm --version
+```
+If you have the above make sure you install the angular CLI by doing the following
+```
+npm install -g @angular/cli
+```
 
 ### Getting Started
 1. Clone the repository
