@@ -2,7 +2,8 @@
 
 create table db_user(
 	id serial not null,
-	role char(20) not null,
+	role char(20) not null default 'user',
+	password varchar(255),
 	name varchar(40) not null,
 	email varchar(40) not null unique,
 	primary key(id)

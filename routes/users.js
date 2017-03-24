@@ -2,6 +2,57 @@ var express = require('express');
 var router = express.Router();
 var db = require('../functions/db');
 var query = require('../functions/query');
+var passport = require('passport');
+
+router.post('/signup', function (req, res) {
+    if(req.body.email && req.body.name && req.body.password){
+        db('SELECT * FROM "Project".db_user WHERE email = $1', [req.body.email], function (err, results) {
+            if (err){
+                res.status(500).json(err);
+            }
+            else if(results.length != 0){
+                res.status(409).json({'Error': 'Conflicting Email'});
+            }
+            else{
+                var params = [req.body.email, req.body.password, req.body.name];
+                db('INSERT INTO "Project".db_user (email, password, name) VALUES ($1, $2, $3)', params, function (err) {
+                    if (err){
+                        res.status(500).json(err);
+                    }
+                    else{
+                        passport.authenticate('local')(req, res, function () {
+                            console.log('Here');
+                            res.status(201).json(req.user);
+                        });
+                    }
+                });
+            }
+        });
+    }
+    else{
+        res.status(400).json({'Error': 'Missing Required Fields'});
+    }
+});
+/*
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/success',
+    failureRedirect: '/failure'
+}));
+*/
+router.post('/login', passport.authenticate('local'), function (req, res) {
+    if(req.user){
+        res.status(200).json(req.user);
+    }
+    else{
+        res.status(401).json({'Message': 'Username or email not found'});
+    }
+});
+router.get('/success', function (req, res) {
+    res.status(200).json({'Message': 'Success'});
+});
+router.get('/failure', function (req, res) {
+    res.status(401).json({'Message': 'Failure'});
+});
 
 router.get('/users', function (req, res) {
     db('SELECT * FROM "Project".db_user', [], function (err, results) {
