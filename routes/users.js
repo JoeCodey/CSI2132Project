@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../functions/db');
 var query = require('../functions/query');
 
-router.get('/users', function (err, res) {
+router.get('/users', function (req, res) {
     db('SELECT * FROM "Project".db_user', [], function (err, results) {
       if (err){
           res.status(500).json(err);
@@ -52,7 +52,6 @@ router.put('/users/:id', function (req, res) {
         }
     })
 });
-
 router.delete('/users/:id', function (req, res) {
     db('DELETE FROM "Project".db_user WHERE ID = $1', [req.params.id], function (err) {
         if (err){
@@ -62,6 +61,22 @@ router.delete('/users/:id', function (req, res) {
             res.status(204).end();
         }
     })
+});
+
+router.post('/users/auth', function (req, res) {
+    db('SELECT * FROM "Project".db_user WHERE username = $1'[req.body.username], function (err, results) {
+        if (err){
+            res.status(500).json(err);
+            return;
+        }
+        var result = results[0];
+        if (!result){
+            res.status(403).json({'Error': 'Invalid Email and Password'})
+        }
+        else{
+            res.status(200).json(result);
+        }
+    });
 });
 
 

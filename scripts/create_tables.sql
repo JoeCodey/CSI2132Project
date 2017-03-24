@@ -1,6 +1,5 @@
 ﻿set search_path = 'Project';
 
-
 create table db_user(
 	id serial not null,
 	role char(20) not null,
@@ -36,6 +35,7 @@ create table meal(
 create table ingredient_for(
 	meal_id integer not null,
 	food_id integer not null,
+	count integer not null default 1,
 	primary key(meal_id, food_id),
 	foreign key (meal_id) references meal(id)
 	on update cascade on delete cascade,
