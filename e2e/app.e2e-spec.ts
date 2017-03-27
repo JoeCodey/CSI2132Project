@@ -1,6 +1,6 @@
 import { Csi2132projectPage } from './app.po';
 
-describe('csi2132project App', function() {
+describe('csi2132project App', () => {
   let page: Csi2132projectPage;
 
   beforeEach(() => {

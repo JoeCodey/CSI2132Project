@@ -22,7 +22,7 @@ app.set('port', port);
  * Connect to uOttawa Postgres server
  */
 var pool = new pg.Pool(dbconfig);
-console.log('Connected with pool: '+pool);
+console.log('Connected with uOttawa PG server: ');
 
 /**
  * Create HTTP server.
