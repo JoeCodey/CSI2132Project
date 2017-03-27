@@ -1,0 +1,43 @@
+<div class="container" id="login-wrapper">
+  <div class="row text-center intro">
+    <h1>Smart Refrigerator System</h1>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 text-center">
+      <h2>Log In as Existing User</h2>
+      <form class="input-box text-left">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input [(ngModel)]="loginEmail" id="loginEmail" placeholder="Enter Email" type="email" class="form-control" name="loginEmail"/>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input [(ngModel)]="loginPassword" id="loginPassword" placeholder="Enter Password" type="password" class="form-control" name="loginPassword"/>
+        </div>
+        <div class="text-center">
+          <button (click)="submitLogin()" class="submit-button btn btn-primary">Log In</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-xs-6 text-center">
+      <h2>Create New Account</h2>
+      <form class="input-box text-left">
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input [(ngModel)]="signupName" id="signupName" placeholder="Enter Full Name" type="text" class="form-control" name="signupName"/>
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input [(ngModel)]="signupEmail" id="signupEmail" placeholder="Enter Email" type="email" class="form-control" name="signupEmail"/>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input [(ngModel)]="signupPassword" id="signupPassword" placeholder="Enter Password" type="password" class="form-control" name="signupPassword"/>
+        </div>
+        <div class="text-center">
+          <button (click)="submitSignup()" class="btn btn-primary submit-button">Sign Up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

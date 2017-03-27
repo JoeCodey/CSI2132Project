@@ -1,0 +1,14 @@
+#login-wrapper{
+  padding-top: 25px;
+}
+#login-wrapper .intro{
+  padding-bottom: 25px;
+}
+.input-box{
+  background-color: #efefef;
+  padding: 20px;
+}
+.submit-button{
+  padding-left: 50px;
+  padding-right: 50px;
+}

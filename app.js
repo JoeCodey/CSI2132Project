@@ -8,6 +8,7 @@ var session = require('express-session');
 var passport = require('passport');
 var db = require('./functions/db');
 var crypt = require('./functions/crypt');
+var cors = require('cors');
 
 //var index = require('./routes/index');
 var users = require('./routes/users');
@@ -16,6 +17,7 @@ var categories = require('./routes/categories');
 var food = require('./routes/food');
 
 var app = express();
+app.use(cors());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
