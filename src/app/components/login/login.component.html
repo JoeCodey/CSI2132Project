@@ -5,17 +5,33 @@
   <div class="row">
     <div class="col-xs-6 text-center">
       <h2>Log In as Existing User</h2>
-      <form class="input-box text-left">
+      <form class="input-box text-left" novalidate>
         <div class="form-group">
           <label for="loginEmail">Email</label>
-          <input [(ngModel)]="loginEmail" id="loginEmail" placeholder="Enter Email" type="email" class="form-control" name="loginEmail"/>
+          <input [(ngModel)]="loginCreds.email" id="loginEmail" placeholder="Enter Email" type="email"
+                 class="form-control" #loginEmail="ngModel" name="loginEmail" pattern="{{emailRegex}}" required/>
+          <div class="alert alert-danger" *ngIf="loginEmail.errors && (loginEmail.dirty || loginEmail.touched)">
+            <div *ngIf="loginEmail.errors.required">
+              Email is Required
+            </div>
+            <div *ngIf="loginEmail.errors.pattern">
+              Must be a Valid Email
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label for="loginPassword">Password</label>
-          <input [(ngModel)]="loginPassword" id="loginPassword" placeholder="Enter Password" type="password" class="form-control" name="loginPassword"/>
+          <input [(ngModel)]="loginCreds.password" id="loginPassword" placeholder="Enter Password"
+                 type="password" class="form-control"
+                 #loginPassword="ngModel" name="loginPassword" required/>
+          <div class="alert alert-danger" *ngIf="loginPassword.errors && (loginPassword.dirty || loginPassword.touched)">
+            <div *ngIf="loginPassword.errors.required">
+              Password is Required
+            </div>
+          </div>
         </div>
         <div class="text-center">
-          <button (click)="submitLogin()" class="submit-button btn btn-primary">Log In</button>
+          <button (click)="submitLogin()" [disabled]="loginEmail.invalid || loginPassword.invalid" class="submit-button btn btn-primary">Log In</button>
         </div>
       </form>
     </div>
@@ -24,18 +40,43 @@
       <form class="input-box text-left">
         <div class="form-group">
           <label for="signupName">Full Name</label>
-          <input [(ngModel)]="signupName" id="signupName" placeholder="Enter Full Name" type="text" class="form-control" name="signupName"/>
+          <input [(ngModel)]="signupCreds.name" id="signupName" placeholder="Enter Full Name" type="text"
+                 class="form-control" name="signupName" #signupName="ngModel" required/>
+          <div class="alert alert-danger" *ngIf="signupName.errors && (signupName.dirty || signupName.touched)">
+            <div *ngIf="signupName.errors.required">
+              Name is Required
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label for="signupEmail">Email</label>
-          <input [(ngModel)]="signupEmail" id="signupEmail" placeholder="Enter Email" type="email" class="form-control" name="signupEmail"/>
+          <input [(ngModel)]="signupCreds.email" id="signupEmail" placeholder="Enter Email" type="email"
+                 class="form-control" name="signupEmail" #signupEmail="ngModel" required pattern="{{emailRegex}}"/>
+          <div class="alert alert-danger" *ngIf="signupEmail.errors && (signupEmail.dirty || signupEmail.touched)">
+            <div *ngIf="signupEmail.errors.required">
+              Email is Required
+            </div>
+            <div *ngIf="signupEmail.errors.pattern">
+              Must be a Valid Email
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label for="signupPassword">Password</label>
-          <input [(ngModel)]="signupPassword" id="signupPassword" placeholder="Enter Password" type="password" class="form-control" name="signupPassword"/>
+          <input [(ngModel)]="signupCreds.password" id="signupPassword" placeholder="Enter Password"
+                 type="password" class="form-control" name="signupPassword" required minlength="5" maxlength="25" #signupPassword="ngModel"/>
+          <div class="alert alert-danger" *ngIf="signupPassword.errors && (signupPassword.dirty || signupPassword.touched)">
+            <div *ngIf="signupPassword.errors.required || signupPassword.errors.minlength">
+              Password must be at least 5 characters
+            </div>
+            <div *ngIf="signupPassword.errors.maxlength">
+              Password can be only a maximum of 30 characters
+            </div>
+          </div>
         </div>
         <div class="text-center">
-          <button (click)="submitSignup()" class="btn btn-primary submit-button">Sign Up</button>
+          <button (click)="submitSignup()" [disabled]="signupName.invalid || signupEmail.invalid || signupPassword.invalid"
+                  class="btn btn-primary submit-button">Sign Up</button>
         </div>
       </form>
     </div>
