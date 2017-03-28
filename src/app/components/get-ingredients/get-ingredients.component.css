@@ -1,0 +1,17 @@
+.search-button{
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.selected{
+  background-color: #d5ecff;
+}
+.select-button{
+  width: 75px;
+}
+.checkout-info{
+  padding-right: 20px;
+}
+.checkout-info h4{
+  display: inline;
+  padding-right: 20px;
+}

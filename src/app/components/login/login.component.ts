@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import { Router } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +21,19 @@ export class LoginComponent implements OnInit {
   hero : any = {
     name: ''
   };
+  loginError : boolean = false;
+  signupError : boolean = false;
   public emailRegex : string = '[A-Za-z0-9\-_]+@[A-Za-z0-9\_-]+\.[A-Za-z0-9\-_]+';
   constructor(private authService : AuthService, private parentRouter : Router) { }
 
   ngOnInit() {
   }
-
+  public resetSignupError(){
+    this.signupError = false;
+  }
+  public resetLoginError(){
+    this.loginError = false;
+  }
   public submitLogin(){
     let successHandler = (data) => {
       this.parentRouter.navigateByUrl('/home-user').catch(err => {
@@ -35,7 +41,7 @@ export class LoginComponent implements OnInit {
       });
     };
     let errorHandler = (err) => {
-      console.log('error');
+      this.loginError = true;
     };
     this.authService.login(this.loginCreds.email, this.loginCreds.password).subscribe(successHandler, errorHandler);
   }
@@ -47,6 +53,7 @@ export class LoginComponent implements OnInit {
     };
     let errorHandler = (err) => {
       console.log('error');
+      this.signupError = true;
     };
     this.authService.signup(this.signupCreds.name, this.signupCreds.email, this.signupCreds.password).subscribe(successHandler, errorHandler);
   }
