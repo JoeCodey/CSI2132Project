@@ -1,6 +1,31 @@
 /**
  * Created by ericdufresne on 2017-03-20.
  */
+exports.selectIn = function (schema, tableName, ids) {
+  var params = [];
+  var query = 'SELECT * FROM "'+schema+'".'+tableName+' WHERE ID IN (';
+  count = 1;
+  for (var i in ids){
+    if (ids.hasOwnProperty(i)){
+      var id = ids[i];
+      if (!Number.isInteger(id)){
+        return null;
+      }
+      params.push(id);
+      query = query+'$'+count;
+      if (count < ids.length){
+        query = query+','
+      }
+      count++;
+    }
+  }
+  query = query+')';
+  return {
+    query: query,
+    params: params
+  }
+};
+
 exports.update = function (schema, tableName, obj, id) {
     var keyString = '';
     var params = [];
