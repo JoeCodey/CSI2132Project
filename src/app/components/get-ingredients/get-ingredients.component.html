@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Get Ingredients</h2>
   <div class="input-group">
-    <input type="text" class="form-control">
+    <input type="text" class="form-control" placeholder="Search Ingredients">
     <div class="input-group-btn">
       <button class="btn btn-primary search-button">Search</button>
     </div>
@@ -33,7 +33,7 @@
   <div class="row">
     <div class="col-xs-6">
       <h4>Selected Items ({{selectionCount()}})</h4>
-      <div class="checkout-box">
+      <div>
         <table class="table">
           <tr *ngFor="let food of getSelectedIngredients()">
             <td>{{food.name}}</td>
@@ -60,5 +60,4 @@
       <button class="btn btn-primary" [disabled]="selectionCount() == 0" (click)="checkout()">Checkout</button>
     </div>
   </div>
-
 </div>

@@ -1,3 +1,60 @@
-<p>
-  order-meal works!
-</p>
+<div class="container">
+  <h2>Order Meal</h2>
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search Meals">
+    <div class="input-group-btn">
+      <button class="btn btn-primary search-button">Search</button>
+    </div>
+  </div>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Cuisine</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Add</th>
+    </tr>
+    <tr *ngFor="let meal of getDeselectedMeals()">
+      <td>{{meal.name}}</td>
+      <td>{{meal.cuisine}}</td>
+      <td>{{meal.description}}</td>
+      <td>{{meal.price | currency: 'USD':true:'1.2-2'}}</td>
+      <td>
+        <button class="btn btn-success btn-xs select-button" (click)="selectMeal(meal)">
+          Order
+          <span class="gylphicon glyphicon-plus"></span>
+        </button>
+      </td>
+    </tr>
+  </table>
+  <div class="row">
+    <div class="col-xs-6 ">
+      <h4>Selected Meals ({{getSelectionCount()}})</h4>
+      <div>
+        <table class="table">
+          <tr *ngFor="let meal of getSelectedMeals()">
+            <td>{{meal.name}}</td>
+            <td>{{meal.price | currency: 'USD':true:'1.2-2'}}</td>
+            <td>{{meal.count}}</td>
+            <td>Total: {{(meal.price * meal.count) | currency: 'USD':true:'1.2-2'}}</td>
+            <td>
+              <button class="btn btn-xs btn-default" [disabled]="meal.count == 1" (click)="decrementMeal(meal)">
+                <span class="glyphicon glyphicon-minus"></span>
+              </button>
+              <button class="btn btn-xs btn-deafult" [disabled]="meal.count == meal.num_of_items" (click)="incrementMeal(meal)">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+              <button class="btn btn-xs btn-danger" (click)="deselectMeal(meal)">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-xs-6 text-right checkout-info">
+      <h4>Total Price: {{getTotalPrice()}}</h4>
+      <button class="btn btn-primary" [disabled]="getSelectionCount() == 0" (click)="checkout()">Checkout</button>
+    </div>
+  </div>
+</div>

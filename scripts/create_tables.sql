@@ -6,6 +6,7 @@ create table db_user(
 	password varchar(255),
 	name varchar(40) not null,
 	email varchar(40) not null unique,
+	session_token char(36),
 	primary key(id)
 );
 
@@ -21,7 +22,7 @@ create table food(
 	num_of_items integer not null default 0,
 	threshold float,
 	primary key (id),
-	foreign key (category_name) references category(category_name) 
+	foreign key (category_name) references category(category_name)
 	on update cascade on delete restrict
 );
 
@@ -69,11 +70,17 @@ create table order_contains(
 
 create table meal_request(
 	order_num serial not null,
-	meal_id integer not null,
 	requester_id integer not null,
-	primary key(meal_id, requester_id),
-	foreign key(meal_id) references meal(id)
-	on update cascade on delete restrict,
+	primary key(order_num),
 	foreign key(requester_id) references db_user(id)
 	on update cascade on delete cascade
+);
+create table request_contians(
+  order_num integer not null,
+  meal_id integer not null,
+  primary key(order_num, meal_id),
+  foreign key(order_num) references meal_request(order_num)
+  on update cascade on delete cascade,
+  foreign key(meal_id) references meal(id)
+  on update cascade on delete cascade
 );
