@@ -14,6 +14,7 @@ import {MealsService} from "./services/meals.service";
 import { OrderMealComponent } from './components/order-meal/order-meal.component';
 import { GetIngredientsComponent } from './components/get-ingredients/get-ingredients.component';
 import { CheckoutSuccessComponent } from './components/checkout-success/checkout-success.component';
+import { HomeChefComponent } from './components/home-chef/home-chef.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CheckoutSuccessComponent } from './components/checkout-success/checkout
     HomeUserComponent,
     OrderMealComponent,
     GetIngredientsComponent,
-    CheckoutSuccessComponent
+    CheckoutSuccessComponent,
+    HomeChefComponent
   ],
   imports: [
     BrowserModule,
