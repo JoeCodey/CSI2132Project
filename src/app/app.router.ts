@@ -5,12 +5,12 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './components/login/login.component';
-import {HomeUserComponent} from "./components/home-user/home-user.component";
-import {OrderMealComponent} from "./components/order-meal/order-meal.component";
-import {GetIngredientsComponent} from "./components/get-ingredients/get-ingredients.component";
-import {CheckoutSuccessComponent} from "./components/checkout-success/checkout-success.component";
-import {HomeChefComponent} from "./components/home-chef/home-chef.component";
+import {HomeUserComponent} from './components/home-user/home-user.component';
+import {HomeChefComponent} from './components/home-chef/home-chef.component';
 import {HomeAdminComponent} from './components/home-admin/home-admin.component';
+import {OrderMealComponent} from './components/order-meal/order-meal.component';
+import {GetIngredientsComponent} from './components/get-ingredients/get-ingredients.component';
+import {CheckoutSuccessComponent} from './components/checkout-success/checkout-success.component';
 
 export const router: Routes = [
   {
@@ -44,52 +44,46 @@ export const router: Routes = [
       }
     ]
   },
+
   {
-  path: 'home-chef',
-  component: HomeChefComponent,
-  children: [
-  {
-    path: 'order-meal',
-    component: OrderMealComponent
+    path: 'home-chef',
+    component: HomeChefComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'browse-meals',
+        pathMatch: 'full'
+      },
+      {
+        path: 'browse-meals',
+        component: OrderMealComponent
+      },
+      {
+        path: 'meal-requests',
+        component: GetIngredientsComponent,
+      },
+    ]
   },
+
   {
-    path: 'get-ingredients',
-    component: GetIngredientsComponent,
+    path: 'home-admin',
+    component: HomeAdminComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'browse-meals',
+        pathMatch: 'full'
+      },
+      {
+        path: 'browse-meals',
+        component: OrderMealComponent
+      },
+      {
+        path: 'meal-requests',
+        component: GetIngredientsComponent,
+      },
+    ]
   },
-  {
-    path: '',
-    redirectTo: 'get-ingredients',
-    pathMatch: 'full'
-  },
-  {
-    path: 'checkout-success',
-    component: CheckoutSuccessComponent
-  }
-]
-},
-  {
-  path: 'home-admin',
-  component: HomeAdminComponent,
-  children: [
-  {
-    path: 'order-meal',
-    component: OrderMealComponent
-  },
-  {
-    path: 'get-ingredients',
-    component: GetIngredientsComponent,
-  },
-  {
-    path: '',
-    redirectTo: 'get-ingredients',
-    pathMatch: 'full'
-  },
-  {
-    path: 'checkout-success',
-    component: CheckoutSuccessComponent
-  }
-]
-},
 
 ];
 

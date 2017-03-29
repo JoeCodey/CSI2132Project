@@ -15,7 +15,7 @@ import { OrderMealComponent } from './components/order-meal/order-meal.component
 import { GetIngredientsComponent } from './components/get-ingredients/get-ingredients.component';
 import { CheckoutSuccessComponent } from './components/checkout-success/checkout-success.component';
 import { HomeChefComponent } from './components/home-chef/home-chef.component';
-import { HomeAdminComponent} from './components/home-admin/home-admin.component';
+import { BrowseMealsComponent } from './components/browse-meals/browse-meals.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { HomeAdminComponent} from './components/home-admin/home-admin.component'
     GetIngredientsComponent,
     CheckoutSuccessComponent,
     HomeChefComponent,
-    HomeAdminComponent
+    BrowseMealsComponent
   ],
   imports: [
     BrowserModule,
