@@ -14,13 +14,16 @@ export class HomeAdminComponent implements OnInit {
   ngOnInit() {
   }
   public isOther(){
-    return  !this.isOrderMeal() && !this.isGetIngredients();
+    return  !this.isGetFoodReports() && !this.approveIngredientOrders() && !this.placeIngredientOrders();
   }
-  public isOrderMeal(){
-    return this.parentRouter.url == '/home-admin/order-meal';
+  public isGetFoodReports() {
+    return this.parentRouter.url == '/home-admin/food-reports';
   }
-  public isGetIngredients(){
-    return this.parentRouter.url == '/home-admin/get-ingredients';
+  public approveIngredientOrders() {
+    return this.parentRouter.url == '/home-admin/approve-ingredient-orders';
+  }
+  public placeIngredientOrders() {
+    return this.parentRouter.url == '/home-admin/place-ingredient-orders';
   }
   logout(){
     this.parentRouter.navigateByUrl('/login').catch(err => {

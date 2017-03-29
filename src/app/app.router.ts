@@ -71,15 +71,19 @@ export const router: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'browse-meals',
+        redirectTo: 'food-reports',
         pathMatch: 'full'
       },
       {
-        path: 'browse-meals',
+        path: 'food-reports',
         component: OrderMealComponent
       },
       {
-        path: 'meal-requests',
+        path: 'approve-ingredient-orders',
+        component: OrderMealComponent
+      },
+      {
+        path: 'place-ingredient-orders',
         component: GetIngredientsComponent,
       },
     ]
