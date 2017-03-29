@@ -19,4 +19,7 @@ export class MealsService {
   public handleError(err) : Observable<any>{
     return Observable.throw(err.json().error || 'Server Error');
   }
+  public checkout(items : [any]) {
+
+  }
 }

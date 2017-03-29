@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="col-xs-6 text-right checkout-info">
-      <h4>Total Price: {{getTotalPrice()}}</h4>
+      <h4>Total Price: {{getTotalPrice() | currency: 'USD':true:'1.2-2'}}</h4>
       <button class="btn btn-primary" [disabled]="getSelectionCount() == 0" (click)="checkout()">Checkout</button>
     </div>
   </div>

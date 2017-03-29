@@ -53,13 +53,18 @@ router.post('/login', passport.authenticate('local'), function (req, res) {
     }
 });
 
-router.get('/auth', function (req, res) {
-    if (req.user){
-        res.status(200).json(req.user);
+router.get('/auth/:token', function (req, res) {
+  db('SELECT * FROM "Project".db_user WHERE session_token = $1', [req.params.token], function (err, results) {
+    if (err){
+      res.status(500).json(err);
+    }
+    else if (results[0]){
+      res.status(200).json(results[0]);
     }
     else{
-        res.status(200).json(null);
+      res.status(404).json({'Error': '404: Not Found'});
     }
+  });
 });
 
 router.get('/users', function (req, res) {
