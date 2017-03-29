@@ -1,0 +1,32 @@
+<nav class="nav navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">Smart Refrigerator System</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right" *ngIf="isGetFoodReports()">
+      <li class="active"><a>Food Reports</a></li>
+      <li><a [routerLink]="['get-ingredients']">Approve Ingredient Orders</a></li>
+      <li><a [routerLink]="['get-ingredients']">Place Ingredient Orders</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" *ngIf="approveIngredientOrders()">
+      <li><a [routerLink]="['get-ingredients']">Food Reports</a></li>
+      <<li class="active"><a>Approve Ingredient Orders</a></li>
+      <li><a [routerLink]="['get-ingredients']">Place Ingredient Orders</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" *ngIf="placeIngredientOrders()">
+      <li><a [routerLink]="['get-ingredients']">Food Reports</a></li>
+      <li><a [routerLink]="['get-ingredients']">Approve Ingredient Orders</a></li>
+      <<li class="active"><a>Place Ingredient Orders</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" *ngIf="isOther()">
+      <li><a [routerLink]="['get-ingredients']">Food Reports</a></li>
+      <li><a [routerLink]="['get-ingredients']">Approve Ingredient Orders</a></li>
+      <li><a [routerLink]="['get-ingredients']">Place Ingredient Orders</a></li>
+      <li><a (click)="logout()">Logout</a> </li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
