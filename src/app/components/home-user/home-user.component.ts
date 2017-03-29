@@ -17,15 +17,15 @@ export class HomeUserComponent implements OnInit {
     return  !this.isOrderMeal() && !this.isGetIngredients();
   }
   public isOrderMeal(){
-    return this.parentRouter.url == '/home-user/order-meal';
+    return this.parentRouter.url === '/home-user/order-meal';
   }
   public isGetIngredients(){
-    return this.parentRouter.url == '/home-user/get-ingredients';
+    return this.parentRouter.url === '/home-user/get-ingredients';
   }
   logout(){
     this.parentRouter.navigateByUrl('/login').catch(err => {
       console.error(err);
-    })
+    });
   }
 
 }
