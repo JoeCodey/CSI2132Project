@@ -34,7 +34,7 @@ import { PlaceIngredientOrderComponent } from './components/place-ingredient-ord
     HomeChefComponent,
     BrowseMealsComponent,
     MealRequestsComponent,
-    MealInfoComponent
+    MealInfoComponent,
     HomeAdminComponent,
     FoodReportComponent,
     ApproveIngredientOrderComponent,
