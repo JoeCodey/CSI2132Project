@@ -16,7 +16,12 @@ export class HomeUserComponent implements OnInit {
     }
     else{
       observable.subscribe(data => {
-        //Redirect to admin or something if chef or admin
+        if (data.role == 'admin'){
+          this.parentRouter.navigateByUrl('/home-admin').catch(err => console.error(err));
+        }
+        else if (data.role == 'chef'){
+          this.parentRouter.navigateByUrl('/home-chef').catch(err => console.error(err));
+        }
       }, err => {
         this.parentRouter.navigateByUrl('/login').catch(err => {console.error(err)});
       })

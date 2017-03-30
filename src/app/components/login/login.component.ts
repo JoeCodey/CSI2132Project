@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
   }
   public submitLogin(){
     let successHandler = (data) => {
+      console.log(data.role);
       if (data.role == 'chef'){
         this.parentRouter.navigateByUrl('/home-chef').catch(err => {
           console.error(err);
