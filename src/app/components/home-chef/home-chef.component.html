@@ -3,18 +3,18 @@
     <div class="navbar-header">
       <a class="navbar-brand">Smart Refrigerator System</a>
     </div>
-    <ul class="nav navbar-nav navbar-right" *ngIf="isBrowseMeals()">
-      <li class="active"><a>Browse Meals</a></li>
+    <ul class="nav navbar-nav navbar-right" *ngIf="isInventory()">
+      <li class="active"><a>Inventory</a></li>
       <li><a [routerLink]="['meal-requests']">Meal Requests</a></li>
       <li><a (click)="logout()">Logout</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" *ngIf="isMealRequests()">
-      <li><a [routerLink]="['browse-meals']">Browse Meals</a></li>
+      <li><a [routerLink]="['inventory']">Inventory</a></li>
       <li class="active"><a>Meal Requests</a></li>
       <li><a (click)="logout()">Logout</a> </li>
     </ul>
     <ul class="nav navbar-nav navbar-right" *ngIf="isOther()">
-      <li><a [routerLink]="['get-ingredients']">Get Ingredients</a></li>
+      <li><a [routerLink]="['inventory']">Get Ingredients</a></li>
       <li><a [routerLink]="['order-meal']">Order Meal</a></li>
       <li><a (click)="logout()">Logout</a> </li>
     </ul>

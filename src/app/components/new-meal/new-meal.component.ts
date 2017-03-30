@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {FoodService} from "../../services/food.service";
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import {router} from "../../app.router";
 
 @Component({
-  selector: 'app-get-ingredients',
-  templateUrl: './get-ingredients.component.html',
-  styleUrls: ['./get-ingredients.component.css']
+  selector: 'app-new-meal',
+  templateUrl: './new-meal.component.html',
+  styleUrls: ['./new-meal.component.css']
 })
-export class GetIngredientsComponent implements OnInit {
+export class NewMealComponent implements OnInit {
+
+  public newMeal : any = {};
+  public descriptionMaxLength : number = 130;
   public ingredients : any = [];
-  public searchString : string = '';
-  public itemsPerPage : number = 10;
   public currentPage : number = 1;
-  constructor(public foodService : FoodService, public parentRouter : Router, public activatedRoute : ActivatedRoute) {
+  public itemsPerPage : number = 5;
+  public searchString : string = '';
+  constructor(private foodService : FoodService) {
     let successHandler = (data) => {
       this.ingredients = data;
       for (let ingredient of this.ingredients){
@@ -27,14 +27,16 @@ export class GetIngredientsComponent implements OnInit {
     };
     this.foodService.listFood().subscribe(successHandler, errorHandler);
   }
-  public selectIngredient(ingredient: any){
-    let index = this.ingredients.indexOf(ingredient);
-    if (index < 0){
-      return;
-    }
-    this.ingredients[index].selected = !this.ingredients[index].selected;
-  }
+
   ngOnInit() {
+  }
+  public remainingCharacters(){
+    if (!this.newMeal.description){
+      return this.descriptionMaxLength;
+    }
+    else{
+      return this.descriptionMaxLength - this.newMeal.description.length;
+    }
   }
   public selectItem(ingredient : any){
     ingredient.selected = true;
@@ -97,18 +99,4 @@ export class GetIngredientsComponent implements OnInit {
     }
     return totalPrice;
   }
-
-
-  public checkout(){
-    let errorHandler = (err) => {
-      console.error(err);
-    };
-    let successHandler = (success) => {
-      this.parentRouter.navigateByUrl('/home-user/checkout-success').catch(err => {
-        console.error(err);
-      });
-    };
-    this.foodService.checkout(this.getSelectedIngredients()).subscribe(successHandler, errorHandler);
-  }
-
 }

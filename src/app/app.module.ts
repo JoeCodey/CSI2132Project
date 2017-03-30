@@ -23,6 +23,7 @@ import {FoodReportComponent}from  './components/food-report/food-report.componen
 import { ApproveIngredientOrderComponent } from './components/approve-ingredient-order/approve-ingredient-order.component';
 import { PlaceIngredientOrderComponent } from './components/place-ingredient-order/place-ingredient-order.component';
 import {AdminService} from "./services/admin.service";
+import { NewMealComponent } from './components/new-meal/new-meal.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {AdminService} from "./services/admin.service";
     HomeAdminComponent,
     FoodReportComponent,
     ApproveIngredientOrderComponent,
-    PlaceIngredientOrderComponent
+    PlaceIngredientOrderComponent,
+    NewMealComponent
   ],
   imports: [
     BrowserModule,

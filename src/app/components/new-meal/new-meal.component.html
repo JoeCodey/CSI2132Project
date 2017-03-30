@@ -1,0 +1,89 @@
+<div class="container">
+  <h2>Create New Meal</h2>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>Meal Info</h4>
+      <form class="input-box text-left" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" #name="ngModel" [(ngModel)]="newMeal.name" name="name" placeholder="Enter Meal Name"
+                 required class="form-control"/>
+          <div class="alert alert-danger" *ngIf="name.errors && (name.dirty || name.touched)">
+            <div>Name is Required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cuisine">Cuisine</label>
+          <input type="text" id="cuisine" #cuisine="ngModel" [(ngModel)]="newMeal.cuisine" name="cuisine"
+                 placeholder="Enter Cuisine Type" required class="form-control">
+          <div class="alert alert-danger" *ngIf="cuisine.errors && (cuisine.dirty || cuisine.touched)">
+            <div>Cuisine is Required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" required #description="ngModel" [(ngModel)]="newMeal.description" name="description" class="form-control" maxlength="{{descriptionMaxLength}}" rows="3" placeholder="Enter a Short Description for the menu">
+        </textarea>
+          <div class="text-right" [ngClass]="{error : remainingCharacters() < 3}">
+            <p>Characters Left: {{remainingCharacters()}}</p>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-xs-6">
+      <table>
+        <tr>
+          <td>Name</td>
+          <td></td>
+        </tr>
+      </table>
+      <h4>Ingredients ({{selectionCount()}})</h4>
+      <div class="output-box" *ngIf="selectionCount() !== 0">
+        <div class="submit-button text-center">
+          <button class="btn btn-success">
+            Create Meal
+          </button>
+        </div>
+      </div>
+      <div class="text-center" *ngIf="selectionCount() === 0">
+        <p class="error">No ingredients to show...</p>
+        <p>Search below to add ingredients</p>
+      </div>
+    </div>
+  </div>
+  <div class="row ingredient-list">
+    <h4>Search Ingredients for this Meal</h4>
+    <div class="input-group">
+      <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search Ingredients">
+      <div class="input-group-btn">
+        <button class="btn btn-primary search-button" >Search</button>
+      </div>
+    </div>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price/Item</th>
+        <th>Inventory</th>
+        <th>Threshold</th>
+        <th>Add</th>
+      </tr>
+      <tr *ngFor="let food of getPaginatedResults();">
+        <td>{{food.name}}</td>
+        <td>{{food.category_name}}</td>
+        <td>{{food.price_per_item | currency: 'USD':true:'1.2-2'}}</td>
+        <td>{{food.num_of_items}}</td>
+        <td>{{food.threshold}}</td>
+        <td>
+          <button class="btn btn-success btn-xs select-button" (click)="selectItem(food)">
+            Add
+            <span class="gylphicon glyphicon-plus"></span>
+          </button>
+        </td>
+      </tr>
+    </table>
+    <ul class="pagination pagination-sm">
+      <li *ngFor="let i of totalPageCount()" [ngClass]="{active: i === currentPage}" (click)="currentPage=i;"><a>{{i}}</a></li>
+    </ul>
+  </div>
+</div>
