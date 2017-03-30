@@ -47,7 +47,6 @@ export const router: Routes = [
       }
     ]
   },
-
   {
     path: 'home-chef',
     component: HomeChefComponent,
@@ -67,7 +66,6 @@ export const router: Routes = [
       },
     ]
   },
-
   {
     path: 'home-admin',
     component: HomeAdminComponent,
@@ -88,7 +86,7 @@ export const router: Routes = [
       {
         path: 'place-ingredient-order',
         component: PlaceIngredientOrderComponent
-      },
+      }
     ]
   },
 
