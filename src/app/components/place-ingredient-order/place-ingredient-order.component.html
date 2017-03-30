@@ -12,14 +12,14 @@
   <table class="table">
     <tr>
       <th>Ingredient Name</th>
-      <th>Quantity Used</th>
+      <th>Current Inventory</th>
       <th>Ingredient Threshold (Max)</th>
       <th>Price/Item</th>
       <th>Buy More</th>
     </tr>
     <tr *ngFor="let food of getPaginatedResults();">
       <td>{{food.name}}</td>
-      <td>{{food.count}}</td>
+      <td>{{food.num_of_items}}</td>
       <td>{{food.threshold}}</td>
       <td>{{food.price_per_item | currency: 'USD':true:'1.2-2'}}</td>
       <td>

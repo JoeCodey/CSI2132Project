@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FoodService} from "../../services/food.service";
+import {IngredientOrderService} from "../../services/ingredient-order.service";
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import {FoodService} from '../../services/food.service';
 import {router} from "../../app.router";
 
 @Component({
@@ -14,7 +15,7 @@ export class PlaceIngredientOrderComponent implements OnInit {
   public searchString : string = '';
   public itemsPerPage : number = 5;
   public currentPage : number = 1;
-  constructor(public placeOrder : FoodService, public parentRouter : Router, public activatedRoute : ActivatedRoute) {
+  constructor(public placeOrderService : FoodService, public parentRouter : Router, public activatedRoute : ActivatedRoute) {
     let successHandler = (data) => {
       this.ingredients = data;
       for (let ingredient of this.ingredients){
@@ -25,7 +26,7 @@ export class PlaceIngredientOrderComponent implements OnInit {
     let errorHandler = (err) => {
       console.error(err);
     };
-    this.placeOrder.listFood().subscribe(successHandler, errorHandler);
+    this.placeOrderService.listAllFood().subscribe(successHandler, errorHandler);
   }
   public selectIngredient(ingredient: any){
     let index = this.ingredients.indexOf(ingredient);
@@ -108,7 +109,7 @@ export class PlaceIngredientOrderComponent implements OnInit {
         console.error(err);
       });
     };
-    this.placeOrder.checkout(this.getSelectedIngredients()).subscribe(successHandler, errorHandler);
+    this.placeOrderService.checkout(this.getSelectedIngredients()).subscribe(successHandler, errorHandler);
   }
 
 }
