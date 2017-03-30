@@ -1,4 +1,61 @@
-<div>
-  <p>Food Report Works</p>
+<div class="container">
+  <h2>Most Expensive Meal</h2>
+  <p>Below is the most expensive meal based on the ingredient price.</p>
+  <table *ngIf="mostExpensiveMeal" class="table">
+    <tr>
+      <th>Name</th>
+      <th>Cuisine</th>
+      <th>Description</th>
+      <th>Price</th>
+    </tr>
+    <tr>
+      <td>{{mostExpensiveMeal.name}}</td>
+      <td>{{mostExpensiveMeal.cuisine}}</td>
+      <td>{{mostExpensiveMeal.description}}</td>
+      <td>{{mostExpensiveMeal.price | currency:'USD':true:'1.2-2'}}</td>
+    </tr>
+  </table>
+  <div *ngIf="!mostExpensiveMeal" class="text-center">
+    <p>No Meal to Show</p>
+  </div>
+  <h2>Top 3 Used Ingredients</h2>
+  <p>Below is the most frequently used ingredients in meals. This is based on quantity as well</p>
+  <table *ngIf="topThreeUsed.length != 0" class="table">
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price/Item</th>
+      <th>Inventory</th>
+      <th>Threshold</th>
+      <th>Amount Needed In Meals</th>
+    </tr>
+    <tr *ngFor="let ingredient of topThreeUsed">
+      <td>{{ingredient.name}}</td>
+      <td>{{ingredient.category_name}}</td>
+      <td>{{ingredient.price_per_item | currency:'USD':true:'1.2-2'}}</td>
+      <td>{{ingredient.num_of_items}}</td>
+      <td>{{ingredient.threshold}}</td>
+      <td *ngIf="ingredient.frequency">{{ingredient.frequency}}</td>
+      <td *ngIf="!ingredient.frequency">{{ingredient.frequency}}</td>
+    </tr>
+  </table>
+  <h2>Popular Meal Orders</h2>
+  <p>Below are popular orders based on their frequency in orders</p>
+  <table *ngIf="mostOrderedMeals.length != 0" class="table">
+    <tr>
+      <th>Name</th>
+      <th>Cuisine</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Number of Orders</th>
+    </tr>
+    <tr *ngFor="let meal of mostOrderedMeals">
+      <td>{{meal.name}}</td>
+      <td>{{meal.cusine}}</td>
+      <td>{{meal.description}}</td>
+      <td>{{meal.price | currency:'USD':true:'1.2-2'}}</td>
+      <td *ngIf="meal.frequency">{{meal.frequency}}</td>
+      <td *ngIf="!meal.frequency">0</td>
+    </tr>
+  </table>
 </div>
-
