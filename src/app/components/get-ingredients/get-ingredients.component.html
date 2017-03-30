@@ -3,7 +3,7 @@
 <div class="container">
   <h2>Get Ingredients </h2>
   <div class="input-group">
-    <input type="text"  class="form-control" placeholder="Search Ingredients">
+    <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search Ingredients">
     <div class="input-group-btn">
       <button class="btn btn-primary search-button" >Search</button>
     </div>
@@ -30,6 +30,9 @@
       </td>
     </tr>
   </table>
+  <ul class="pagination pagination-sm">
+    <li *ngFor="let i of totalPageCount()" [ngClass]="{active: i === currentPage}" (click)="currentPage=i;"><a>{{i}}</a></li>
+  </ul>
   <div class="row">
     <div class="col-xs-6">
       <h4>Selected Items ({{selectionCount()}})</h4>
