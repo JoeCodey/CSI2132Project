@@ -72,6 +72,7 @@ create table meal_request(
 	order_num serial not null,
 	requester_id integer not null,
 	primary key(order_num),
+	active boolean not null default true,
 	foreign key(requester_id) references db_user(id)
 	on update cascade on delete cascade
 );
