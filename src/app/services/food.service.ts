@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
@@ -12,6 +12,13 @@ export class FoodService {
 
   public listFood() : Observable<any>{
     return this.http.get(this.foodEndpoint).map(res => res.json()).catch(this.handleError);
+  }
+  public listAllFood(): Observable<any>{
+    let queryParams: URLSearchParams = new URLSearchParams();
+    queryParams.set('ignoreNone', 'true');
+    let requestOptions = new RequestOptions();
+    requestOptions.search = queryParams;
+    return this.http.get(this.foodEndpoint, requestOptions).map(res => res.json()).catch(this.handleError);
   }
   public getFood(id : string) : Observable<any>{
     return this.http.get(this.foodEndpoint+'/'+id).map(res => res.json()).catch(this.handleError);

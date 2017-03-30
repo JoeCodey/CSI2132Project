@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
@@ -11,6 +11,14 @@ export class MealsService {
   mealRequestEndpoint: string = 'http://localhost:8080/api/meal-requests';
   constructor(private http : Http) { }
 
+  public listAllMeals() : Observable<any> {
+    let params : URLSearchParams = new URLSearchParams();
+    params.set('ignoreNone', 'true');
+    let requestOptions = new RequestOptions();
+    requestOptions.params = params;
+    return this.http.get(this.mealsEndpoint, requestOptions).map(res => res.json()).catch(this.handleError);
+  }
+
   public listMeals() : Observable<any>{
     return this.http.get(this.mealsEndpoint).map(res => res.json()).catch(this.handleError);
   }
@@ -21,7 +29,7 @@ export class MealsService {
     return Observable.throw(err.json().error || 'Server Error');
   }
   public deleteMeal(id: string): Observable<any>{
-    return this.http.delete(this.mealsEndpoint + '/' + id).catch(this.handleError);
+    return this.http.delete(this.mealsEndpoint + '/' + id).map(res => res.json()).catch(this.handleError);
   }
   public createMeal(meal: any, ingredients : [any]) : Observable<any>{
     let data = {
@@ -38,5 +46,13 @@ export class MealsService {
       items: items
     };
     return this.http.post(this.mealRequestEndpoint, data).map(res => res.json()).catch(this.handleError);
+  }
+
+  public listAllMealRequests(): Observable<any> {
+    return this.http.get(this.mealRequestEndpoint).map(res => res.json()).catch(this.handleError);
+  }
+
+  public getMealRequestIngredients(id: number){
+    return this.http.get(this.mealRequestEndpoint+'/'+id).map(res => res.json()).catch(this.handleError);
   }
 }

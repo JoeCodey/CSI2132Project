@@ -20,7 +20,7 @@ router.post('/meals', function (req, res) {
 
 router.get('/meals', function (req, res) {
     if (req.query.ignoreNone){
-      db('SELECT * FROM MEALS', [], function (err, results) {
+      db('SELECT * FROM "Project".meal', [], function (err, results) {
         if (err){
           res.status(500).json(err);
         }
