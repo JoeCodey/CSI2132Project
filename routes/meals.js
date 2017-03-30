@@ -44,6 +44,7 @@ router.get('/meals', function (req, res) {
 
 });
 
+
 router.get('/meals/:id', function (req, res) {
     db('SELECT * FROM "Project".meal WHERE ID = $1', [req.params.id], function (err, meals) {
         if(err){
@@ -81,8 +82,9 @@ router.put('/meals/:id', function (req, res) {
     });
 });
 router.delete('/meals/:id', function (req, res) {
-    db('DELETE FROM "Project".meals WHERE ID = $1', [req.params.id], function (err) {
+    db('DELETE FROM "Project".meal WHERE ID = $1', [req.params.id], function (err) {
         if(err){
+          console.log(err);
             res.status(500).json(err);
         }
         else{

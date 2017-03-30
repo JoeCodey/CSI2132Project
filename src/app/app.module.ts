@@ -17,6 +17,8 @@ import { CheckoutSuccessComponent } from './components/checkout-success/checkout
 import { HomeChefComponent } from './components/home-chef/home-chef.component';
 import { HomeAdminComponent} from './components/home-admin/home-admin.component';
 import { BrowseMealsComponent } from './components/browse-meals/browse-meals.component';
+import { MealRequestsComponent } from './components/meal-requests/meal-requests.component';
+import { MealInfoComponent } from './components/meal-info/meal-info.component';
 import {FoodReportComponent}from  './components/food-report/food-report.component';
 import { ApproveIngredientOrderComponent } from './components/approve-ingredient-order/approve-ingredient-order.component';
 import { PlaceIngredientOrderComponent } from './components/place-ingredient-order/place-ingredient-order.component';
@@ -31,8 +33,10 @@ import {AdminService} from "./services/admin.service";
     GetIngredientsComponent,
     CheckoutSuccessComponent,
     HomeChefComponent,
-    HomeAdminComponent,
     BrowseMealsComponent,
+    MealRequestsComponent,
+    MealInfoComponent,
+    HomeAdminComponent,
     FoodReportComponent,
     ApproveIngredientOrderComponent,
     PlaceIngredientOrderComponent

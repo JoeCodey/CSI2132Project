@@ -20,6 +20,9 @@ export class MealsService {
   public handleError(err) : Observable<any>{
     return Observable.throw(err.json().error || 'Server Error');
   }
+  public deleteMeal(id: string): Observable<any>{
+    return this.http.delete(this.mealsEndpoint + '/' + id).catch(this.handleError);
+  }
   public checkout(items : [any], userId : any) : Observable<any>{
     let data = {
       userId: userId,
