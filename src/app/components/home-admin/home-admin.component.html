@@ -1,0 +1,26 @@
+<nav class="nav navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">Smart Refrigerator System</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right" *ngIf="isReports()">
+      <li class="active"><a>Food Reports</a></li>
+      <li><a [routerLink]="['approve-ingredient-order']">Approve Ingredient Orders</a></li>
+      <li><a [routerLink]="['place-ingredient-order']">Place Ingredient Orders</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" *ngIf="isApproveIngredientOrders()">
+      <li><a [routerLink]="['food-reports']">Food Reports</a></li>
+      <li class="active"><a>Approve Ingredient Orders</a></li>
+      <li><a [routerLink]="['place-ingredient-order']">Place Ingredient Orders</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" *ngIf="isPlaceIngredientOrders()">
+      <li><a [routerLink]="['food-reports']">Food Reports</a></li>
+      <li><a [routerLink]="['approve-ingredient-order']">Approve Ingredient Orders</a></li>
+      <li class="active"><a>Place Ingredient Orders</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>

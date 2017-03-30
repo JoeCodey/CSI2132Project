@@ -13,6 +13,10 @@ import {HomeChefComponent} from './components/home-chef/home-chef.component';
 import {BrowseMealsComponent} from './components/browse-meals/browse-meals.component';
 import {MealInfoComponent} from './components/meal-info/meal-info.component';
 import {MealRequestsComponent} from './components/meal-requests/meal-requests.component'
+import {HomeAdminComponent} from './components/home-admin/home-admin.component';
+import {FoodReportComponent} from './components/food-report/food-report.component';
+import {ApproveIngredientOrderComponent} from './components/approve-ingredient-order/approve-ingredient-order.component';
+import {PlaceIngredientOrderComponent} from './components/place-ingredient-order/place-ingredient-order.component';
 
 export const router: Routes = [
   {
@@ -46,7 +50,6 @@ export const router: Routes = [
       }
     ]
   },
-
   {
     path: 'home-chef',
     component: HomeChefComponent,
@@ -67,6 +70,29 @@ export const router: Routes = [
       {
         path: 'meal-info/:id',
         component: MealInfoComponent
+      }
+    ]
+  },
+  {
+    path: 'home-admin',
+    component: HomeAdminComponent,
+    children: [
+      {
+        path: 'food-reports',
+        component: FoodReportComponent
+      },
+      {
+        path: '',
+        redirectTo: 'food-reports',
+        pathMatch: 'full'
+      },
+      {
+        path: 'approve-ingredient-order',
+        component: ApproveIngredientOrderComponent
+      },
+      {
+        path: 'place-ingredient-order',
+        component: PlaceIngredientOrderComponent
       }
     ]
   },

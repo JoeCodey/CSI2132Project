@@ -1,6 +1,7 @@
 /**
  * Created by ericdufresne on 2017-03-20.
  */
+
 exports.selectIn = function (schema, tableName, ids) {
   var params = [];
   var query = 'SELECT * FROM "'+schema+'".'+tableName+' WHERE ID IN (';
@@ -49,6 +50,69 @@ exports.update = function (schema, tableName, obj, id) {
         params: params
     }
 };
+
+exports.tuples = function (schema, tableName, objs, keySet) {
+  var paramsCount = 1;
+  var tupleString = '';
+  var params = [];
+  var itemCount = 1;
+  for (var i in objs){
+    if(objs.hasOwnProperty(i)){
+      var obj = objs[i];
+      var result = exports.tuple(obj, paramsCount, keySet);
+      var tuple = result.tuple;
+      var p = result.params;
+      params = params.concat(p);
+      tupleString = tupleString+tuple;
+      itemCount++;
+      if (itemCount <= objs.length){
+        tupleString = tupleString+',';
+      }
+    }
+  }
+  i = 0;
+  var keyString = '(';
+  var keyCount = 1;
+  for (i in keySet){
+    if (keySet.hasOwnProperty(i)){
+      keyString = keyString + keySet[i];
+      keyCount++;
+      if (keyCount <= keySet.length){
+        keyString = keyString+', ';
+      }
+    }
+  }
+  keyString = keyString+' )';
+  var query = 'INSERT INTO "'+schema+'".'+tableName+' '+keyString+' VALUES '+tupleString;
+  return {
+    query: query,
+    params: params
+  };
+};
+exports.tuple = function(obj, start, keySet) {
+  var tuple = '(';
+  count = 1;
+  var params = [];
+  for (var i in keySet){
+    if (keySet.hasOwnProperty(i)){
+      var key = keySet[i];
+      var val = obj[key];
+      params.push(val);
+      tuple = tuple+' $'+start;
+      start++;
+      count++;
+      if(count <= keySet.length){
+        tuple = tuple+', ';
+      }
+    }
+  }
+  tuple = tuple+')';
+  return {
+    tuple: tuple,
+    params: params
+  }
+};
+
 exports.insert = function (schema, tableName, obj) {
     var keyString = '(';
     var valueString = '(';
