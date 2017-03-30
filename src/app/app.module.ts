@@ -17,6 +17,9 @@ import { CheckoutSuccessComponent } from './components/checkout-success/checkout
 import { HomeChefComponent } from './components/home-chef/home-chef.component';
 import { HomeAdminComponent} from './components/home-admin/home-admin.component';
 import { BrowseMealsComponent } from './components/browse-meals/browse-meals.component';
+import {FoodReportComponent}from  './components/food-report/food-report.component';
+import { ApproveIngredientOrderComponent } from './components/approve-ingredient-order/approve-ingredient-order.component';
+import { PlaceIngredientOrderComponent } from './components/place-ingredient-order/place-ingredient-order.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { BrowseMealsComponent } from './components/browse-meals/browse-meals.com
     CheckoutSuccessComponent,
     HomeChefComponent,
     HomeAdminComponent,
-    BrowseMealsComponent
+    BrowseMealsComponent,
+    FoodReportComponent,
+    ApproveIngredientOrderComponent,
+    PlaceIngredientOrderComponent
   ],
   imports: [
     BrowserModule,
