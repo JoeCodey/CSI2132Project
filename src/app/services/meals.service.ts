@@ -31,6 +31,15 @@ export class MealsService {
   public deleteMeal(id: string): Observable<any>{
     return this.http.delete(this.mealsEndpoint + '/' + id).map(res => res.json()).catch(this.handleError);
   }
+  public createMeal(meal: any, ingredients : [any]) : Observable<any>{
+    let data = {
+      cuisine: meal.cuisine,
+      name: meal.name,
+      description: meal.description,
+      ingredients: ingredients
+    };
+    return this.http.post(this.mealsEndpoint, data).map(res => res.json()).catch(this.handleError);
+  }
   public checkout(items : [any], userId : any) : Observable<any>{
     let data = {
       userId: userId,

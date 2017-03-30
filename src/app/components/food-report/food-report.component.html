@@ -9,7 +9,7 @@
       <th>Price</th>
     </tr>
     <tr>
-      <td>{{mostExpensiveMeal.name}}</td>
+      <td><a [routerLink]="['../meal-info', mostExpensiveMeal.id]">{{mostExpensiveMeal.name}}</a></td>
       <td>{{mostExpensiveMeal.cuisine}}</td>
       <td>{{mostExpensiveMeal.description}}</td>
       <td>{{mostExpensiveMeal.price | currency:'USD':true:'1.2-2'}}</td>
@@ -30,7 +30,7 @@
       <th>Amount Needed In Meals</th>
     </tr>
     <tr *ngFor="let ingredient of topThreeUsed">
-      <td>{{ingredient.name}}</td>
+      <td><a>{{ingredient.name}}</a></td>
       <td>{{ingredient.category_name}}</td>
       <td>{{ingredient.price_per_item | currency:'USD':true:'1.2-2'}}</td>
       <td>{{ingredient.num_of_items}}</td>
@@ -50,7 +50,7 @@
       <th>Number of Orders</th>
     </tr>
     <tr *ngFor="let meal of mostOrderedMeals">
-      <td>{{meal.name}}</td>
+      <td><a [routerLink]="['../meal-info', meal.id]">{{meal.name}}</a></td>
       <td>{{meal.cusine}}</td>
       <td>{{meal.description}}</td>
       <td>{{meal.price | currency:'USD':true:'1.2-2'}}</td>

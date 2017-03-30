@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MealsService} from "../../services/meals.service";
 import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-order-meal',
@@ -9,7 +10,7 @@ import {AuthService} from "../../services/auth.service";
 })
 export class OrderMealComponent implements OnInit {
   meals : any = [];
-  constructor(private mealsService : MealsService, public authService : AuthService) {
+  constructor(private mealsService : MealsService, public authService : AuthService, public parentRouter : Router) {
     let errorHandler = (err) => {
       console.error(err);
     };
@@ -65,7 +66,9 @@ export class OrderMealComponent implements OnInit {
     if (observable){
       observable.subscribe(data => {
         this.mealsService.checkout(this.getSelectedMeals(), data.id).subscribe(data => {
-          console.log('IT WORKED');
+          this.parentRouter.navigateByUrl('/home-user/checkout-success').catch( err => {
+            console.error(err);
+          });
         }, err => {
           console.log('Error');
           console.error(err);
