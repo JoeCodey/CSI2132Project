@@ -17,7 +17,6 @@ router.post('/signup', function (req, res) {
             else{
                 crypt.hash(req.body.password, function (err, hash) {
                     if(err){
-                        throw err;
                         res.status(400).json({'Error': 'Invalid Password'});
                     }
                     else{

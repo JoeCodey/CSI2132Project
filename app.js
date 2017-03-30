@@ -50,8 +50,8 @@ passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password
                 throw err;
             }
             else if (isMatch){
-                var params = [uuid4()];
-                db('UPDATE "Project".db_user SET session_token = $1', params, function (err) {
+                var params = [uuid4(), result.id];
+                db('UPDATE "Project".db_user SET session_token = $1 WHERE id = $2', params, function (err) {
                   if(err){
                     throw err;
                   }
