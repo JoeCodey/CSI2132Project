@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-home-admin',
@@ -8,27 +9,26 @@ import { Router } from '@angular/router';
 })
 export class HomeAdminComponent implements OnInit {
 
-  constructor(public parentRouter : Router) {
+  constructor(public parentRouter : Router, public authService : AuthService) {
   }
-
-  ngOnInit() {
+  public isReports(){
+    return this.parentRouter.url === '/home-admin/food-reports';
+  }
+  public isApproveIngredientOrders(){
+    return this.parentRouter.url === '/home-admin/approve-ingredient-order';
+  }
+  public isPlaceIngredientOrders(){
+    return this.parentRouter.url === '/home-admin/place-ingredient-order';
   }
   public isOther(){
-    return  !this.isGetFoodReports() && !this.approveIngredientOrders() && !this.placeIngredientOrders();
+    return !this.isReports() && !this.isApproveIngredientOrders() && !this.isPlaceIngredientOrders();
   }
-  public isGetFoodReports() {
-    return this.parentRouter.url == '/home-admin/food-reports';
+  ngOnInit() {
+
   }
-  public approveIngredientOrders() {
-    return this.parentRouter.url == '/home-admin/approve-ingredient-orders';
-  }
-  public placeIngredientOrders() {
-    return this.parentRouter.url == '/home-admin/place-ingredient-orders';
-  }
-  logout(){
-    this.parentRouter.navigateByUrl('/login').catch(err => {
-      console.error(err);
-    })
+  public logout(){
+    this.authService.logout();
+    this.parentRouter.navigateByUrl('/login').catch(err => {console.error(err)});
   }
 
 }
