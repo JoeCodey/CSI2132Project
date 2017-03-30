@@ -6,10 +6,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './components/login/login.component';
 import {HomeUserComponent} from './components/home-user/home-user.component';
-import {HomeChefComponent} from './components/home-chef/home-chef.component';
 import {OrderMealComponent} from './components/order-meal/order-meal.component';
 import {GetIngredientsComponent} from './components/get-ingredients/get-ingredients.component';
 import {CheckoutSuccessComponent} from './components/checkout-success/checkout-success.component';
+import {HomeChefComponent} from './components/home-chef/home-chef.component';
+import {BrowseMealsComponent} from './components/browse-meals/browse-meals.component';
+import {MealInfoComponent} from './components/meal-info/meal-info.component';
+import {MealRequestsComponent} from './components/meal-requests/meal-requests.component'
 
 export const router: Routes = [
   {
@@ -55,12 +58,16 @@ export const router: Routes = [
       },
       {
         path: 'browse-meals',
-        component: OrderMealComponent
+        component: BrowseMealsComponent
       },
       {
         path: 'meal-requests',
-        component: GetIngredientsComponent,
+        component: MealRequestsComponent
       },
+      {
+        path: 'meal-info/:id',
+        component: MealInfoComponent
+      }
     ]
   },
 

@@ -16,6 +16,8 @@ import { GetIngredientsComponent } from './components/get-ingredients/get-ingred
 import { CheckoutSuccessComponent } from './components/checkout-success/checkout-success.component';
 import { HomeChefComponent } from './components/home-chef/home-chef.component';
 import { BrowseMealsComponent } from './components/browse-meals/browse-meals.component';
+import { MealRequestsComponent } from './components/meal-requests/meal-requests.component';
+import { MealInfoComponent } from './components/meal-info/meal-info.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { BrowseMealsComponent } from './components/browse-meals/browse-meals.com
     GetIngredientsComponent,
     CheckoutSuccessComponent,
     HomeChefComponent,
-    BrowseMealsComponent
+    BrowseMealsComponent,
+    MealRequestsComponent,
+    MealInfoComponent
   ],
   imports: [
     BrowserModule,
