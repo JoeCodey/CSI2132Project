@@ -1,9 +1,11 @@
+
+
 <div class="container">
-  <h2>Get Ingredients</h2>
+  <h2>Get Ingredients </h2>
   <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search Ingredients">
+    <input type="text"  class="form-control" placeholder="Search Ingredients">
     <div class="input-group-btn">
-      <button class="btn btn-primary search-button">Search</button>
+      <button class="btn btn-primary search-button" >Search</button>
     </div>
   </div>
   <table class="table">
@@ -23,13 +25,11 @@
       <td>{{food.threshold}}</td>
       <td>
         <button class="btn btn-success btn-xs select-button" (click)="selectItem(food)">
-          Add
           <span class="gylphicon glyphicon-plus"></span>
         </button>
       </td>
     </tr>
   </table>
-
   <div class="row">
     <div class="col-xs-6">
       <h4>Selected Items ({{selectionCount()}})</h4>

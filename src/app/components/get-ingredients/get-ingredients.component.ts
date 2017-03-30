@@ -43,7 +43,7 @@ export class GetIngredientsComponent implements OnInit {
     ingredient.count = 0;
   }
   public incrementItem(ingredient: any){
-    if (ingredient.count == ingredient.num_of_items){
+    if (ingredient.count === ingredient.num_of_items){
       return;
     }
     ingredient.count++;
@@ -71,6 +71,8 @@ export class GetIngredientsComponent implements OnInit {
     }
     return totalPrice;
   }
+
+
   public checkout(){
     let errorHandler = (err) => {
       console.error(err);
