@@ -12,3 +12,6 @@
   display: inline;
   padding-right: 20px;
 }
+a{
+  cursor: pointer;
+}

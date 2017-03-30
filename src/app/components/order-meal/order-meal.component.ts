@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MealsService} from "../../services/meals.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-order-meal',
@@ -8,7 +9,7 @@ import {MealsService} from "../../services/meals.service";
 })
 export class OrderMealComponent implements OnInit {
   meals : any = [];
-  constructor(private mealsService : MealsService) {
+  constructor(private mealsService : MealsService, public authService : AuthService) {
     let errorHandler = (err) => {
       console.error(err);
     };
@@ -60,6 +61,17 @@ export class OrderMealComponent implements OnInit {
     return sum;
   }
   public checkout(){
+    let observable = this.authService.currentUser();
+    if (observable){
+      observable.subscribe(data => {
+        this.mealsService.checkout(this.getSelectedMeals(), data.id).subscribe(data => {
+          console.log('IT WORKED');
+        }, err => {
+          console.log('Error');
+          console.error(err);
+        });
+      }, err => {console.error(err)});
+    }
 
   }
 
