@@ -31,16 +31,32 @@
       </form>
     </div>
     <div class="col-xs-6">
-      <table>
-        <tr>
-          <td>Name</td>
-          <td></td>
-        </tr>
-      </table>
       <h4>Ingredients ({{selectionCount()}})</h4>
       <div class="output-box" *ngIf="selectionCount() !== 0">
+        <div>
+          <table class="table">
+            <tr *ngFor="let food of getSelectedIngredients()">
+              <td>{{food.name}}</td>
+              <td>{{food.price_per_item | currency: 'USD':true:'1.2-2'}}</td>
+              <td>{{food.count}}</td>
+              <td>Total: {{(food.price_per_item * food.count) | currency: 'USD':true:'1.2-2'}}</td>
+              <td>
+                <button class="btn btn-xs btn-default" [disabled]="food.count == 1" (click)="decrementItem(food);">
+                  <span class="gylphicon glyphicon-minus" ></span>
+                </button>
+                <button class="btn btn-xs btn-default" (click)="incrementItem(food);">
+                  <span class="gylphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn btn-xs btn-danger" (click)="deselectItem(food);">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </td>
+            </tr>
+          </table>
+          <h4>Total Price: {{getTotalPrice() | currency:'USD':true:'1.2-2'}}</h4>
+        </div>
         <div class="submit-button text-center">
-          <button class="btn btn-success">
+          <button class="btn btn-success" (click)="createMeal()" [disabled]="name.errors || selectionCount() == 0 || cuisine.errors">
             Create Meal
           </button>
         </div>

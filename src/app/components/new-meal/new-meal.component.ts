@@ -48,9 +48,6 @@ export class NewMealComponent implements OnInit {
     ingredient.count = 0;
   }
   public incrementItem(ingredient: any){
-    if (ingredient.count === ingredient.num_of_items){
-      return;
-    }
     ingredient.count++;
   }
   public decrementItem(ingredient: any){
@@ -98,5 +95,8 @@ export class NewMealComponent implements OnInit {
       totalPrice += ingredient.count * ingredient.price_per_item;
     }
     return totalPrice;
+  }
+  public createMeal(){
+
   }
 }
