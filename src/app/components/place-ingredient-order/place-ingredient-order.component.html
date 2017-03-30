@@ -1,3 +1,65 @@
-<div>
-  <p>Place ingredient Order Works</p>
+
+
+<div class="container">
+  <h2>Place Ingredient Orders </h2>
+  <p>Below is a list of all ingredients and the current inventory for each ingredient.</p>
+  <div class="input-group">
+    <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search Ingredients">
+    <div class="input-group-btn">
+      <button class="btn btn-primary search-button" >Search</button>
+    </div>
+  </div>
+  <table class="table">
+    <tr>
+      <th>Ingredient Name</th>
+      <th>Quantity Used</th>
+      <th>Ingredient Threshold (Max)</th>
+      <th>Price/Item</th>
+      <th>Buy More</th>
+    </tr>
+    <tr *ngFor="let food of getPaginatedResults();">
+      <td>{{food.name}}</td>
+      <td>{{food.count}}</td>
+      <td>{{food.threshold}}</td>
+      <td>{{food.price_per_item | currency: 'USD':true:'1.2-2'}}</td>
+      <td>
+        <button class="btn btn-success btn-xs select-button" (click)="selectItem(food)">
+          <span class="gylphicon glyphicon-plus"></span>
+        </button>
+      </td>
+    </tr>
+  </table>
+  <ul class="pagination pagination-sm">
+    <li *ngFor="let i of totalPageCount()" [ngClass]="{active: i === currentPage}" (click)="currentPage=i;"><a>{{i}}</a></li>
+  </ul>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>Selected Items ({{selectionCount()}})</h4>
+      <div>
+        <table class="table">
+          <tr *ngFor="let food of getSelectedIngredients()">
+            <td>{{food.name}}</td>
+            <td>{{food.price_per_item | currency: 'USD':true:'1.2-2'}}</td>
+            <td>{{food.count}}</td>
+            <td>Total: {{(food.price_per_item * food.count) | currency: 'USD':true:'1.2-2'}}</td>
+            <td>
+              <button class="btn btn-xs btn-default" [disabled]="food.count == 1" (click)="decrementItem(food);">
+                <span class="gylphicon glyphicon-minus" ></span>
+              </button>
+              <button class="btn btn-xs btn-default" [disabled]="food.count == food.num_of_items" (click)="incrementItem(food);">
+                <span class="gylphicon glyphicon-plus"></span>
+              </button>
+              <button class="btn btn-xs btn-danger" (click)="deselectItem(food);">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-xs-6 checkout-info text-right">
+      <h4>Total Price: {{getTotalPrice() | currency:'USD':true:'1.2-2'}}</h4>
+      <button class="btn btn-primary" [disabled]="selectionCount() == 0" (click)="checkout()">Checkout</button>
+    </div>
+  </div>
 </div>
