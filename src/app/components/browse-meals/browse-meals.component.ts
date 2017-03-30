@@ -16,7 +16,7 @@ export class BrowseMealsComponent implements OnInit {
     let errorHandler = (err) => {
       console.error(err);
     };
-    this.mealsService.listMeals().subscribe(successHandler, errorHandler);
+    this.mealsService.listAllMeals().subscribe(successHandler, errorHandler);
   }
 
   public deleteMeal(meal: any){
