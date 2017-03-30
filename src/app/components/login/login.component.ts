@@ -28,9 +28,21 @@ export class LoginComponent implements OnInit {
     let observable = this.authService.currentUser();
     if (observable){
       observable.subscribe(data => {
-        this.parentRouter.navigateByUrl('/home-user').catch(err => {
-          console.error(err);
-        })
+        if (data.role == 'chef'){
+          this.parentRouter.navigateByUrl('/home-chef').catch(err => {
+            console.error(err);
+          });
+        }
+        else if (data.role == 'admin'){
+          this.parentRouter.navigateByUrl('/home-admin').catch(err => {
+            console.error(err);
+          });
+        }
+        else{
+          this.parentRouter.navigateByUrl('/home-user').catch(err => {
+            console.error(err);
+          });
+        }
       }, err => {
         //Do nothing
       })
@@ -47,9 +59,21 @@ export class LoginComponent implements OnInit {
   }
   public submitLogin(){
     let successHandler = (data) => {
-      this.parentRouter.navigateByUrl('/home-user').catch(err => {
-        console.error(err);
-      });
+      if (data.role == 'chef'){
+        this.parentRouter.navigateByUrl('/home-chef').catch(err => {
+          console.error(err);
+        });
+      }
+      else if (data.role == 'admin'){
+        this.parentRouter.navigateByUrl('/home-admin').catch(err => {
+          console.error(err);
+        });
+      }
+      else{
+        this.parentRouter.navigateByUrl('/home-user').catch(err => {
+          console.error(err);
+        });
+      }
     };
     let errorHandler = (err) => {
       this.loginError = true;

@@ -6,16 +6,51 @@ var router = express.Router();
 var db = require('../functions/db');
 var query = require('../functions/query');
 
-router.post('/meals/:id/meal-requests', function (req, res) {
-    var params = [req.params.id, req.params.userId];
-    db('INSERT INTO "Project".meal_request (meal_id, requester_id) VALUES ($1, $2)', params, function (err, res) {
-        if (err){
+router.post('/meal-requests', function (req, res) {
+  if (!req.body){
+    res.status(400).json({'Error': '400 Bad Request. POST request must have body'});
+  }
+  else if (!req.body.userId){
+    res.status(400).json({'Error': '400 Bad Request. userId is required in body'});
+  }
+  else if (!req.body.items){
+    res.status(400).json({'Error': '400 Bad Request. items is required in body'});
+  }
+  else if (req.body.items.length == 0){
+    res.status(400).json({'Error': '400 Bad Request. Items must have at least one item'});
+  }
+  else{
+    var params = [req.body.userId];
+    db('INSERT INTO "Project".meal_request (requester_id) VALUES ($1) RETURNING order_num', params, function (err, results) {
+      if (err){
+        res.status(500).json(err);
+        throw err;
+      }
+      else{
+        var items = req.body.items;
+        for (var i in items){
+          if (items.hasOwnProperty(i)){
+            var item = items[0];
+            item.order_num = results[0].order_num;
+            item.meal_id = item.id;
+          }
+        }
+        var keySet = ['count', 'meal_id', 'order_num'];
+        var q = query.tuples('Project', 'request_contains', items, keySet);
+        console.log(q.query);
+        console.log(q.params);
+        db(q.query, q.params, function (err) {
+          if(err){
             res.status(500).json(err);
-        }
-        else{
+            throw err;
+          }
+          else{
             res.status(201).json({'Message': 'Created'});
-        }
+          }
+        });
+      }
     });
+  }
 });
 router.get('/meal-requests', function (req, res) {
     var query =

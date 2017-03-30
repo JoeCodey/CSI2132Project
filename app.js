@@ -15,6 +15,7 @@ var users = require('./routes/users');
 var meals = require('./routes/meals');
 var categories = require('./routes/categories');
 var food = require('./routes/food');
+var mealRequests = require('./routes/meal-requests');
 var uuid4 = require('uuid/v4');
 
 var app = express();
@@ -78,6 +79,7 @@ app.use('/api', users);
 app.use('/api', categories);
 app.use('/api', meals);
 app.use('/api', food);
+app.use('/api', mealRequests);
 
 
 module.exports = app;
