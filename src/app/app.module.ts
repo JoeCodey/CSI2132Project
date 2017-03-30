@@ -11,6 +11,7 @@ import { HomeUserComponent } from './components/home-user/home-user.component';
 import {FoodService} from "./services/food.service";
 import {RouterModule} from "@angular/router";
 import {MealsService} from "./services/meals.service";
+import {IngredientOrderService} from './services/ingredient-order.service';
 import { OrderMealComponent } from './components/order-meal/order-meal.component';
 import { GetIngredientsComponent } from './components/get-ingredients/get-ingredients.component';
 import { CheckoutSuccessComponent } from './components/checkout-success/checkout-success.component';
@@ -49,7 +50,7 @@ import {AdminService} from "./services/admin.service";
     RouterModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService, FoodService, MealsService, AdminService],
+  providers: [AuthService, FoodService, MealsService, AdminService, IngredientOrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
