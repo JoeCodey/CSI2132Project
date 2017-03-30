@@ -11,6 +11,9 @@ import {router} from "../../app.router";
 })
 export class GetIngredientsComponent implements OnInit {
   public ingredients : any = [];
+  public searchString : string = '';
+  public itemsPerPage : number = 5;
+  public currentPage : number = 1;
   constructor(public foodService : FoodService, public parentRouter : Router, public activatedRoute : ActivatedRoute) {
     let successHandler = (data) => {
       this.ingredients = data;
@@ -54,8 +57,31 @@ export class GetIngredientsComponent implements OnInit {
     }
     ingredient.count--;
   }
+  public totalPageCount(){
+    let val = Math.ceil(this.getUnselectedIngredients().length/this.itemsPerPage);
+    let arr = [];
+    for (let i = 1;i<=val;i++){
+      arr.push(i);
+    }
+    return arr;
+  }
+  public getPaginatedResults(){
+    let unselectedIngredients = this.getUnselectedIngredients();
+    let first = (this.currentPage-1) * this.itemsPerPage;
+    let last = (this.currentPage * this.itemsPerPage);
+
+    return unselectedIngredients.slice(first, last);
+  }
   public getUnselectedIngredients(){
-    return this.ingredients.filter((item) => {return item.selected === false});
+    let modifiedSearchString = this.searchString.trim().toLowerCase();
+    return this.ingredients.filter((item) => {
+      if (modifiedSearchString.length == 0){
+        return item.selected === false;
+      }
+      else{
+        return item.selected === false && item.name.trim().toLowerCase().includes(modifiedSearchString);
+      }
+    });
   }
   public getSelectedIngredients(){
     return this.ingredients.filter((item) => {return item.selected === true});
@@ -78,7 +104,6 @@ export class GetIngredientsComponent implements OnInit {
       console.error(err);
     };
     let successHandler = (success) => {
-      console.log('Success');
       this.parentRouter.navigateByUrl('/home-user/checkout-success').catch(err => {
         console.error(err);
       });

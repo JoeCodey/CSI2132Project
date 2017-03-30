@@ -24,7 +24,30 @@ export class LoginComponent implements OnInit {
   loginError : boolean = false;
   signupError : boolean = false;
   public emailRegex : string = '[A-Za-z0-9\-_]+@[A-Za-z0-9\_-]+\.[A-Za-z0-9\-_]+';
-  constructor(private authService : AuthService, private parentRouter : Router) { }
+  constructor(private authService : AuthService, private parentRouter : Router) {
+    let observable = this.authService.currentUser();
+    if (observable){
+      observable.subscribe(data => {
+        if (data.role == 'chef'){
+          this.parentRouter.navigateByUrl('/home-chef').catch(err => {
+            console.error(err);
+          });
+        }
+        else if (data.role == 'admin'){
+          this.parentRouter.navigateByUrl('/home-admin').catch(err => {
+            console.error(err);
+          });
+        }
+        else{
+          this.parentRouter.navigateByUrl('/home-user').catch(err => {
+            console.error(err);
+          });
+        }
+      }, err => {
+        //Do nothing
+      })
+    }
+  }
 
   ngOnInit() {
   }
@@ -36,9 +59,22 @@ export class LoginComponent implements OnInit {
   }
   public submitLogin(){
     let successHandler = (data) => {
-      this.parentRouter.navigateByUrl('/home-user').catch(err => {
-        console.error(err);
-      });
+      console.log(data.role);
+      if (data.role == 'chef'){
+        this.parentRouter.navigateByUrl('/home-chef').catch(err => {
+          console.error(err);
+        });
+      }
+      else if (data.role == 'admin'){
+        this.parentRouter.navigateByUrl('/home-admin').catch(err => {
+          console.error(err);
+        });
+      }
+      else{
+        this.parentRouter.navigateByUrl('/home-user').catch(err => {
+          console.error(err);
+        });
+      }
     };
     let errorHandler = (err) => {
       this.loginError = true;

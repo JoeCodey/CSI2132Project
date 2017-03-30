@@ -17,7 +17,7 @@
       <th>Threshold</th>
       <th>Add</th>
     </tr>
-    <tr *ngFor="let food of getUnselectedIngredients()">
+    <tr *ngFor="let food of getPaginatedResults();">
       <td>{{food.name}}</td>
       <td>{{food.category_name}}</td>
       <td>{{food.price_per_item | currency: 'USD':true:'1.2-2'}}</td>

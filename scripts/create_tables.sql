@@ -75,9 +75,10 @@ create table meal_request(
 	foreign key(requester_id) references db_user(id)
 	on update cascade on delete cascade
 );
-create table request_contians(
+create table request_contains(
   order_num integer not null,
   meal_id integer not null,
+  count integer not null default 1,
   primary key(order_num, meal_id),
   foreign key(order_num) references meal_request(order_num)
   on update cascade on delete cascade,

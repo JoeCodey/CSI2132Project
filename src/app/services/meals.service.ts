@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class MealsService {
   mealsEndpoint : string = 'http://localhost:8080/api/meals';
+  mealRequestEndpoint: string = 'http://localhost:8080/api/meal-requests';
   constructor(private http : Http) { }
 
   public listMeals() : Observable<any>{
@@ -18,5 +19,12 @@ export class MealsService {
   }
   public handleError(err) : Observable<any>{
     return Observable.throw(err.json().error || 'Server Error');
+  }
+  public checkout(items : [any], userId : any) : Observable<any>{
+    let data = {
+      userId: userId,
+      items: items
+    };
+    return this.http.post(this.mealRequestEndpoint, data).map(res => res.json()).catch(this.handleError);
   }
 }

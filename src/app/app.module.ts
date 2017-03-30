@@ -14,6 +14,12 @@ import {MealsService} from "./services/meals.service";
 import { OrderMealComponent } from './components/order-meal/order-meal.component';
 import { GetIngredientsComponent } from './components/get-ingredients/get-ingredients.component';
 import { CheckoutSuccessComponent } from './components/checkout-success/checkout-success.component';
+import { HomeChefComponent } from './components/home-chef/home-chef.component';
+import { HomeAdminComponent} from './components/home-admin/home-admin.component';
+import { BrowseMealsComponent } from './components/browse-meals/browse-meals.component';
+import {FoodReportComponent}from  './components/food-report/food-report.component';
+import { ApproveIngredientOrderComponent } from './components/approve-ingredient-order/approve-ingredient-order.component';
+import { PlaceIngredientOrderComponent } from './components/place-ingredient-order/place-ingredient-order.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,13 @@ import { CheckoutSuccessComponent } from './components/checkout-success/checkout
     HomeUserComponent,
     OrderMealComponent,
     GetIngredientsComponent,
-    CheckoutSuccessComponent
+    CheckoutSuccessComponent,
+    HomeChefComponent,
+    HomeAdminComponent,
+    BrowseMealsComponent,
+    FoodReportComponent,
+    ApproveIngredientOrderComponent,
+    PlaceIngredientOrderComponent
   ],
   imports: [
     BrowserModule,

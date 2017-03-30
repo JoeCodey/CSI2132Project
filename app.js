@@ -15,6 +15,8 @@ var users = require('./routes/users');
 var meals = require('./routes/meals');
 var categories = require('./routes/categories');
 var food = require('./routes/food');
+var mealRequests = require('./routes/meal-requests');
+var uuid4 = require('uuid/v4');
 
 var app = express();
 app.use(cors());
@@ -48,7 +50,14 @@ passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password
                 throw err;
             }
             else if (isMatch){
-                done(null, results[0]);
+                var params = [uuid4(), result.id];
+                db('UPDATE "Project".db_user SET session_token = $1 WHERE id = $2', params, function (err) {
+                  if(err){
+                    throw err;
+                  }
+                  results[0].session_token = params[0];
+                  done(null, results[0]);
+                });
             }
             else{
                 done(null, false, 'User with email password combination not found');
@@ -70,6 +79,7 @@ app.use('/api', users);
 app.use('/api', categories);
 app.use('/api', meals);
 app.use('/api', food);
+app.use('/api', mealRequests);
 
 
 module.exports = app;
