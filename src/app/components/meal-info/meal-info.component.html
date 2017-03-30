@@ -1,0 +1,24 @@
+<div class="container"  >
+  <h2>Meal: {{meal.name}}</h2>
+  <br/>
+  <br/>
+  <table class="meal-info-table table">
+    <tr>
+      <th>Cuisine</th>
+      <td>{{meal.cuisine}}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{meal.description}}</td>
+    </tr>
+    <tr>
+      <th>Ingredients</th>
+      <td>
+        <ul>
+          <li *ngFor="let ingredient of meal.ingredients">{{ingredient.name + " (" + ingredient.count + ")"}}</li>
+        </ul>
+      </td>
+    </tr>
+
+  </table>
+</div>

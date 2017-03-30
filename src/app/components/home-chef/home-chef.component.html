@@ -5,7 +5,7 @@
     </div>
     <ul class="nav navbar-nav navbar-right" *ngIf="isBrowseMeals()">
       <li class="active"><a>Browse Meals</a></li>
-      <li><a [routerLink]="['meal-request']">Meal Requests</a></li>
+      <li><a [routerLink]="['meal-requests']">Meal Requests</a></li>
       <li><a (click)="logout()">Logout</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" *ngIf="isMealRequests()">
