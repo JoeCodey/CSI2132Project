@@ -1,3 +1,28 @@
-<p>
-  meal-requests works!
-</p>
+<div class="container">
+  <h2>Meal Requests </h2>
+  <div class="input-group">
+    <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search Ingredients">
+    <div class="input-group-btn">
+      <button class="btn btn-primary search-button" >Search</button>
+    </div>
+  </div>
+  <table class="table">
+    <tr>
+      <th>Order #</th>
+      <th>Meal Name</th>
+      <th>Requester</th>
+      <th>Count</th>
+      <th>Served</th>
+    </tr>
+    <tr *ngFor="let mealReq of getActiveRequests();">
+      <td>{{mealReq.order_num}}</td>
+      <td>{{mealReq.name}}</td>
+      <td>{{mealReq.requested_by}}</td>
+      <td>{{mealReq.count}}</td>
+      <td>
+        <button class="btn-primary">Serve</button>
+      </td>
+    </tr>
+  </table>
+
+</div>
