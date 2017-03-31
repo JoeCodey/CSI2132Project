@@ -7,15 +7,49 @@ var db = require('../functions/db');
 var query = require('../functions/query');
 
 router.post('/meals', function (req, res) {
+  if (!req.body.name){
+    res.status(400).json({'Error': 'Bad Request, name missing'});
+  }
+  else if (!req.body.cuisine){
+    res.status(400).json({'Error': 'Bad Request, cuisine missing'});
+  }
+  else if (!req.body.ingredients){
+    res.status(400).json({'Error': 'Bad Request, ingredients missing'});
+  }
+  else if (req.body.ingredients.length <= 0){
+    res.status(400).json({'Error': 'Bad Request, meal must have at least 1 ingredient'});
+  }
+  else{
     var params = [req.body.name, req.body.description, req.body.cuisine];
-    db('INSERT INTO "Project".meals (name, description, cuisine) VALUES ($1, $2, $3)', params, function (err) {
-        if(err){
+    db('INSERT INTO "Project".meal (name, description, cuisine) VALUES ($1, $2, $3) RETURNING id', params, function (err, results) {
+      if(err){
+        res.status(500).json(err);
+      }
+      else{
+        var ingredients = req.body.ingredients;
+        var mealId = results[0].id;
+
+        for (var i in ingredients){
+          if (ingredients.hasOwnProperty(i)){
+            ingredients[i].meal_id = mealId;
+            ingredients[i].food_id = ingredients[i].id;
+          }
+        }
+        var keySet = ['meal_id', 'food_id', 'count'];
+        var q = query.tuples("Project", "ingredient_for", ingredients, keySet);
+        console.log(q.params);
+        console.log(q.query);
+        db(q.query, q.params, function (err) {
+          if(err){
             res.status(500).json(err);
-        }
-        else{
-            res.status(201).json({'Message': 'Created'});
-        }
+          }
+          else{
+            res.status(201).json({'Message': 'Created', id: mealId});
+          }
+        });
+      }
     });
+  }
 });
 
 router.get('/meals', function (req, res) {

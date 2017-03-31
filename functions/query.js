@@ -52,14 +52,14 @@ exports.update = function (schema, tableName, obj, id) {
 };
 
 exports.tuples = function (schema, tableName, objs, keySet) {
-  var paramsCount = 1;
   var tupleString = '';
   var params = [];
   var itemCount = 1;
   for (var i in objs){
     if(objs.hasOwnProperty(i)){
       var obj = objs[i];
-      var result = exports.tuple(obj, paramsCount, keySet);
+      var startVal = 1+keySet.length*(itemCount-1);
+      var result = exports.tuple(obj, startVal, keySet);
       var tuple = result.tuple;
       var p = result.params;
       params = params.concat(p);

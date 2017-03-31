@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FoodService} from "../../services/food.service";
+import {MealsService} from "../../services/meals.service";
 
 @Component({
   selector: 'app-new-meal',
@@ -14,7 +15,7 @@ export class NewMealComponent implements OnInit {
   public currentPage : number = 1;
   public itemsPerPage : number = 5;
   public searchString : string = '';
-  constructor(private foodService : FoodService) {
+  constructor(private foodService : FoodService, private mealService: MealsService) {
     let successHandler = (data) => {
       this.ingredients = data;
       for (let ingredient of this.ingredients){
@@ -97,6 +98,11 @@ export class NewMealComponent implements OnInit {
     return totalPrice;
   }
   public createMeal(){
-
+    this.mealService.createMeal(this.newMeal, this.getSelectedIngredients()).subscribe(data => {
+      console.log(data);
+      console.log('Good');
+    }, err => {
+      console.error(err);
+    });
   }
 }
