@@ -85,7 +85,7 @@ router.get('/meals/:id', function (req, res) {
             res.status(500).json(err);
         }
         else if (meals[0]){
-            var query = 'SELECT name, count FROM "Project".ingredient_for as ingfor, "Project".food as f WHERE f.id = ingfor.food_id AND ingfor.meal_id = $1';
+            var query = 'SELECT f.name, f.num_of_items as count_available, ingfor.count FROM "Project".ingredient_for as ingfor, "Project".food as f WHERE f.id = ingfor.food_id AND ingfor.meal_id = $1';
             var params = [req.params.id];
             db(query, params, function (err, ingredients) {
                 if(err){

@@ -15,6 +15,7 @@ export class NewIngredientComponent implements OnInit {
   };
   categories : any = [];
   integerError : boolean = false;
+  nameError : boolean = false;
   constructor(private foodService : FoodService, private categoryService : CategoryService, private parentRouter : Router) {
     this.categoryService.listCategories().subscribe(data => {
       this.categories = data;
@@ -38,7 +39,11 @@ export class NewIngredientComponent implements OnInit {
       this.parentRouter.navigateByUrl('/home-chef/ingredient-info/'+data.id);
     }, err => {
       console.error(err);
+      this.nameError = true;
     });
+  }
+  public resetNameError(){
+    this.nameError = false;
   }
 
 }

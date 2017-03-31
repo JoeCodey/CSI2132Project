@@ -43,10 +43,10 @@
             <td>{{food.count}}</td>
             <td>Total: {{(food.price_per_item * food.count) | currency: 'USD':true:'1.2-2'}}</td>
             <td>
-              <button class="btn btn-xs btn-default" [disabled]="food.count == 1" (click)="decrementItem(food);">
+              <button class="btn btn-xs btn-default" [disabled]="food.count == 0" (click)="decrementItem(food);">
                 <span class="gylphicon glyphicon-minus" ></span>
               </button>
-              <button class="btn btn-xs btn-default" [disabled]="food.count == food.num_of_items" (click)="placeOrderIncrement(food);">
+              <button class="btn btn-xs btn-default" [disabled]="food.count == food.num_of_items" (click)="incrementItem(food);">
                 <span class="gylphicon glyphicon-plus"></span>
               </button>
               <button class="btn btn-xs btn-danger" (click)="deselectItem(food);">

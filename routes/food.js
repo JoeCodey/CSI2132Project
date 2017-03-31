@@ -21,6 +21,43 @@ router.post('/food', function (req, res) {
     }
   });
 });
+
+router.put('/food/restock', function (req, res) {
+  var restockItems = req.body.items;
+  if(!restockItems){
+    res.status(400).json({'Error': 'No restock items passed to API'});
+    return;
+  }
+  if (restockItems.length == 0){
+    res.status(400).json({'Error': 'Restock items cannot be empty'});
+    return;
+  }
+  var ids = [];
+  for (var i in restockItems){
+    if (restockItems.hasOwnProperty(i)){
+      var restockItem = restockItems[i];
+      ids.push(restockItem.id);
+    }
+  }
+  var q = query.selectIn('Project', 'food', ids);
+  i = 0;
+  for (i in restockItems){
+    if (restockItems.hasOwnProperty(i)){
+      var restockItem = restockItems[i];
+      var params = [restockItem.count, restockItem.id];
+      db('UPDATE "Project".food SET num_of_items = num_of_items + $1 WHERE ID = $2', params, function (err) {
+        if(err){
+          res.status(500).json(err);
+        }
+        else{
+          res.status(204).end();
+        }
+      });
+    }
+  }
+
+
+});
 router.put('/food/checkout', function (req, res) {
   var checkoutItems = req.body.items;
   if (!checkoutItems) {
@@ -38,8 +75,6 @@ router.put('/food/checkout', function (req, res) {
     }
   }
   var q = query.selectIn('Project', 'food', ids);
-  console.log(q.query);
-  console.log(q.params);
   if (!q) {
     res.status(400).json({'Error': 'Ids do not contain all numbers', sample: ids});
     return;
@@ -147,7 +182,7 @@ router.put('/food/:id', function (req, res) {
 router.delete('/food/:id', function (req, res) {
   db('DELETE FROM "Project".food WHERE ID = $1', [req.params.id], function (err) {
     if (err) {
-      res.status(500).json(err);
+      res.status(409).json(err);
     }
     else {
       res.status(204).end();

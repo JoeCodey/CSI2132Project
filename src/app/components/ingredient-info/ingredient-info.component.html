@@ -4,14 +4,43 @@
     <tr>
       <th>Category</th>
       <td>{{ingredient.category_name}}</td>
+      <td>
+        <button class="btn btn-primary btn-xs">
+          Edit
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+      </td>
     </tr>
     <tr>
       <th>Price Per Item</th>
       <td>{{ingredient.price_per_item | currency:'USD':true:'1.2-2'}}</td>
+      <td>
+        <button class="btn btn-primary btn-xs">
+          Edit
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+      </td>
     </tr>
     <tr>
       <th>Threshold</th>
       <td>{{ingredient.threshold}}</td>
+      <td>
+        <button class="btn btn-primary btn-xs">
+          Edit
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <th>Current Inventory</th>
+      <td>{{ingredient.num_of_items}}</td>
     </tr>
   </table>
+  <div class="text-right">
+    <p class="error-message" *ngIf="deletionError">This ingredient is used in meals. You must delete those first</p>
+    <button class="btn btn-danger" (click)="deleteIngredient()">
+      Delete
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
 </div>

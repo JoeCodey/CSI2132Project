@@ -122,8 +122,7 @@ export const router: Routes = [
         component: ChangeRoleAdminComponent
       }
     ]
-  },
-
+  }
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

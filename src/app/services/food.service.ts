@@ -26,11 +26,23 @@ export class FoodService {
   public createFood(food : any){
     return this.http.post(this.foodEndpoint, food).map(res => res.json()).catch(this.handleError);
   }
+  public updateFood(id: string, food : any){
+    return this.http.put(this.foodEndpoint+'/'+id, food).map(res => res.json()).catch(this.handleError);
+  }
+  public deleteFood(id: string){
+    return this.http.delete(this.foodEndpoint+'/'+id).map(res => res.json()).catch(this.handleError);
+  }
   public checkout(items: [any]): Observable<any>{
     let data = {
       items: items
     };
     return this.http.put(this.foodEndpoint+'/checkout', data).map(res => res.json()).catch(this.handleError);
+  }
+  public restock(items: [any]) : Observable<any>{
+    let data = {
+      items: items
+    };
+    return this.http.put(this.foodEndpoint+'/restock', data).map(res => res.json()).catch(this.handleError);
   }
   public handleError(err) : Observable<any>{
     return Observable.throw(err.json().error || 'Server Error');

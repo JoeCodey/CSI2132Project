@@ -39,16 +39,12 @@ export class PlaceIngredientOrderComponent implements OnInit {
   }
   public selectItem(ingredient : any){
     ingredient.selected = true;
-    ingredient.count = 0;
+    ingredient.count = 1;
     console.log(ingredient.count);
   }
   public deselectItem(ingredient: any){
     ingredient.selected = false;
     ingredient.count = 0;
-  }
-  public placeDeselectItem(ingredient:any) {
-    this.ingredients[ingredient.num_of_items] = ingredient.num_of_items;
-    ingredient.selected = false;
   }
   public incrementItem(ingredient: any){
     if (ingredient.count === ingredient.num_of_items){
@@ -56,15 +52,8 @@ export class PlaceIngredientOrderComponent implements OnInit {
     }
     ingredient.count++;
   }
-  public placeOrderIncrement(ingredient:any){
-    if (ingredient.count === ingredient.num_of_items) {
-      return;
-    }
-    ingredient.count++;
-    ingredient.num_of_items = ingredient.num_of_items + 1;
-  }
   public decrementItem(ingredient: any){
-    if (ingredient.count <= 1){
+    if (ingredient.count <= 0){
       return;
     }
     ingredient.count--;
@@ -110,7 +99,6 @@ export class PlaceIngredientOrderComponent implements OnInit {
     return totalPrice;
   }
 
-
   public checkout(){
     let errorHandler = (err) => {
       console.error(err);
@@ -120,7 +108,8 @@ export class PlaceIngredientOrderComponent implements OnInit {
         console.error(err);
       });
     };
-    this.placeOrderService.checkout(this.getSelectedIngredients()).subscribe(successHandler, errorHandler);
+    this.placeOrderService.restock(this.getSelectedIngredients()).subscribe(successHandler, errorHandler);
   }
+// Original get_ingredients checkout changed to RESTOCK here ^^^
 
 }

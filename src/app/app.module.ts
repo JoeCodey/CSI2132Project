@@ -52,7 +52,7 @@ import { IngredientInfoComponent } from './components/ingredient-info/ingredient
     PlaceIngredientOrderComponent,
 
     ChangeRoleAdminComponent,
-
+    
     NewMealComponent,
     NewIngredientComponent,
     IngredientInfoComponent
@@ -68,7 +68,7 @@ import { IngredientInfoComponent } from './components/ingredient-info/ingredient
   ],
 
 
-  providers: [AuthService, FoodService, MealsService, AdminService, IngredientOrderService, CategoryService, UserService],
+  providers: [AuthService, FoodService, MealsService, AdminService, IngredientOrderService, CategoryService,UserService],
 
   bootstrap: [AppComponent]
 })
