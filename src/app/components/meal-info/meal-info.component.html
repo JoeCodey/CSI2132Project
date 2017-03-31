@@ -4,10 +4,22 @@
     <tr>
       <th>Cuisine</th>
       <td>{{meal.cuisine}}</td>
+      <td>
+        <button class="btn btn-primary btn-xs">
+          Edit
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+      </td>
     </tr>
     <tr>
       <th>Description</th>
       <td>{{meal.description}}</td>
+      <td>
+        <button class="btn btn-primary btn-xs">
+          Edit
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+      </td>
     </tr>
     <tr>
       <th>Ingredients</th>
@@ -16,7 +28,16 @@
           <li *ngFor="let ingredient of meal.ingredients">{{ingredient.name + " (" + ingredient.count + ")"}}</li>
         </ul>
       </td>
+      <button class="btn btn-primary btn-xs">
+        Edit
+        <span class="glyphicon glyphicon-edit"></span>
+      </button>
     </tr>
-
   </table>
+  <div class="text-right">
+    <button class="btn btn-danger" (click)="deleteMeal()">
+      Delete
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
 </div>

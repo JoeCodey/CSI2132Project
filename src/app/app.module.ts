@@ -50,9 +50,7 @@ import { IngredientInfoComponent } from './components/ingredient-info/ingredient
     FoodReportComponent,
     ApproveIngredientOrderComponent,
     PlaceIngredientOrderComponent,
-
-    ChangeRoleAdminComponent
-
+    ChangeRoleAdminComponent,
     NewMealComponent,
     NewIngredientComponent,
     IngredientInfoComponent

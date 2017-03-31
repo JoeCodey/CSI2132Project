@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FoodService} from "../../services/food.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
   selector: 'app-ingredient-info',
@@ -10,7 +10,8 @@ import {ActivatedRoute, Params} from "@angular/router";
 export class IngredientInfoComponent implements OnInit {
 
   public ingredient : any = {};
-  constructor(private foodService : FoodService, private activatedRoute : ActivatedRoute  ) {
+  public deletionError : boolean = false;
+  constructor(private foodService : FoodService, private activatedRoute : ActivatedRoute, private parentRouter : Router) {
     this.activatedRoute.params.subscribe((params : Params) => {
       let id = params['id'];
       this.foodService.getFood(id).subscribe(data => {
@@ -19,6 +20,18 @@ export class IngredientInfoComponent implements OnInit {
         console.error(err);
       });
     });
+  }
+  public deleteIngredient(){
+    if (this.ingredient.id){
+      this.foodService.deleteFood(this.ingredient.id).subscribe(data => {
+        this.parentRouter.navigateByUrl('/home-chef').catch(err => {
+          console.error(err);
+        })
+      }, err => {
+        this.deletionError = true;
+        console.error(err);
+      })
+    }
   }
 
   ngOnInit() {

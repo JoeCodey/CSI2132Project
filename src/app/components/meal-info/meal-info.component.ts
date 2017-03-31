@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MealsService} from '../../services/meals.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-meal-info',
@@ -9,7 +9,8 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class MealInfoComponent implements OnInit {
   public meal: any = {};
-  constructor(private mealsService: MealsService,  private activatedRoute: ActivatedRoute) {
+  public deletionError : boolean = false;
+  constructor(private mealsService: MealsService,  private activatedRoute: ActivatedRoute, public parentRouter : Router) {
     let that = this;
     let errorHandler = (err) => { console.error(err); };
     activatedRoute.params.subscribe(
@@ -25,5 +26,14 @@ export class MealInfoComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  public deleteMeal(){
+    if (this.meal.id){
+      this.mealsService.deleteMeal(this.meal.id).subscribe(data => {
+        this.parentRouter.navigateByUrl('/home-chef').catch(err => {console.error(err)});
+      }, err => {
+        this.deletionError = true;
+        console.error(err)
+      });
+    }
+  }
 }
