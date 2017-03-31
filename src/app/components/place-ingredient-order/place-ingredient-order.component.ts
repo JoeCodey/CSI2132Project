@@ -39,18 +39,29 @@ export class PlaceIngredientOrderComponent implements OnInit {
   }
   public selectItem(ingredient : any){
     ingredient.selected = true;
-    ingredient.count = 1;
+    ingredient.count = 0;
     console.log(ingredient.count);
   }
   public deselectItem(ingredient: any){
     ingredient.selected = false;
     ingredient.count = 0;
   }
+  public placeDeselectItem(ingredient:any) {
+    this.ingredients[ingredient.num_of_items] = ingredient.num_of_items;
+    ingredient.selected = false;
+  }
   public incrementItem(ingredient: any){
     if (ingredient.count === ingredient.num_of_items){
       return;
     }
     ingredient.count++;
+  }
+  public placeOrderIncrement(ingredient:any){
+    if (ingredient.count === ingredient.num_of_items) {
+      return;
+    }
+    ingredient.count++;
+    ingredient.num_of_items = ingredient.num_of_items + 1;
   }
   public decrementItem(ingredient: any){
     if (ingredient.count <= 1){

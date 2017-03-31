@@ -13,7 +13,7 @@
     <tr>
       <th>Ingredient Name</th>
       <th>Current Inventory</th>
-      <th>Ingredient Threshold (Max)</th>
+      <th>Ingredient Threshold</th>
       <th>Price/Item</th>
       <th>Buy More</th>
     </tr>
@@ -46,7 +46,7 @@
               <button class="btn btn-xs btn-default" [disabled]="food.count == 1" (click)="decrementItem(food);">
                 <span class="gylphicon glyphicon-minus" ></span>
               </button>
-              <button class="btn btn-xs btn-default" [disabled]="food.count == food.num_of_items" (click)="incrementItem(food);">
+              <button class="btn btn-xs btn-default" [disabled]="food.count == food.num_of_items" (click)="placeOrderIncrement(food);">
                 <span class="gylphicon glyphicon-plus"></span>
               </button>
               <button class="btn btn-xs btn-danger" (click)="deselectItem(food);">
