@@ -15,8 +15,7 @@ export class MealInfoComponent implements OnInit {
     activatedRoute.params.subscribe(
       function(params){
         mealsService.getMeal(params['id']).subscribe(
-          (data) => {that.meal = data; console.log(that.meal);
-          },
+          (data) => {that.meal = data;},
           errorHandler
         );
       },

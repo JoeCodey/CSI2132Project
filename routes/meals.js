@@ -7,20 +7,54 @@ var db = require('../functions/db');
 var query = require('../functions/query');
 
 router.post('/meals', function (req, res) {
+  if (!req.body.name){
+    res.status(400).json({'Error': 'Bad Request, name missing'});
+  }
+  else if (!req.body.cuisine){
+    res.status(400).json({'Error': 'Bad Request, cuisine missing'});
+  }
+  else if (!req.body.ingredients){
+    res.status(400).json({'Error': 'Bad Request, ingredients missing'});
+  }
+  else if (req.body.ingredients.length <= 0){
+    res.status(400).json({'Error': 'Bad Request, meal must have at least 1 ingredient'});
+  }
+  else{
     var params = [req.body.name, req.body.description, req.body.cuisine];
-    db('INSERT INTO "Project".meals (name, description, cuisine) VALUES ($1, $2, $3)', params, function (err) {
-        if(err){
+    db('INSERT INTO "Project".meal (name, description, cuisine) VALUES ($1, $2, $3) RETURNING id', params, function (err, results) {
+      if(err){
+        res.status(500).json(err);
+      }
+      else{
+        var ingredients = req.body.ingredients;
+        var mealId = results[0].id;
+
+        for (var i in ingredients){
+          if (ingredients.hasOwnProperty(i)){
+            ingredients[i].meal_id = mealId;
+            ingredients[i].food_id = ingredients[i].id;
+          }
+        }
+        var keySet = ['meal_id', 'food_id', 'count'];
+        var q = query.tuples("Project", "ingredient_for", ingredients, keySet);
+        console.log(q.params);
+        console.log(q.query);
+        db(q.query, q.params, function (err) {
+          if(err){
             res.status(500).json(err);
-        }
-        else{
-            res.status(201).json({'Message': 'Created'});
-        }
+          }
+          else{
+            res.status(201).json({'Message': 'Created', id: mealId});
+          }
+        });
+      }
     });
+  }
 });
 
 router.get('/meals', function (req, res) {
     if (req.query.ignoreNone){
-      db('SELECT * FROM MEALS', [], function (err, results) {
+      db('SELECT id, name, cuisine, description, (SELECT SUM(f.price_per_item * ifor.count) FROM "Project".ingredient_for as ifor, "Project".food as f WHERE f.id = ifor.food_id AND ifor.meal_id = m.id) as price FROM "Project".meal as m', [], function (err, results) {
         if (err){
           res.status(500).json(err);
         }
@@ -84,7 +118,6 @@ router.put('/meals/:id', function (req, res) {
 router.delete('/meals/:id', function (req, res) {
     db('DELETE FROM "Project".meal WHERE ID = $1', [req.params.id], function (err) {
         if(err){
-          console.log(err);
             res.status(500).json(err);
         }
         else{

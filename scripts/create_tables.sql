@@ -16,7 +16,7 @@ create table category(
 );
 create table food(
 	id serial not null,
-	name varchar(20) not null,
+	name varchar(20) unique not null,
 	category_name varchar(20) not null,
 	price_per_item float not null,
 	num_of_items integer not null default 0,
@@ -28,9 +28,9 @@ create table food(
 
 create table meal(
 	id serial not null,
-	name varchar(20) not null,
+	name varchar(40) unique not null,
 	description text,
-	cuisine varchar(20),
+	cuisine varchar(40) not null,
 	primary key (id)
 );
 

@@ -1,35 +1,65 @@
-<div class="container">
-  <h2>Browse Meals</h2>
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search Meals">
-    <div class="input-group-btn">
-      <button class="btn btn-primary search-button">Search</button>
+<div class="container wrapper">
+  <div class="row">
+    <h2>Inventory</h2>
+  </div>
+  <div class="row table-row">
+    <h4>Meal Inventory</h4>
+    <div class="input-group">
+      <input type="text" class="form-control" [(ngModel)]="mealSearchString" placeholder="Search Meals">
+      <div class="input-group-btn">
+        <button class="btn btn-primary search-button">Search</button>
+      </div>
+    </div>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Cuisine</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+      <tr *ngFor="let meal of getPaginatedMeals()">
+        <td><a [routerLink]="['../meal-info', meal.id]">{{meal.name}}</a></td>
+        <td>{{meal.cuisine}}</td>
+        <td>{{meal.description}}</td>
+        <td>{{meal.price | currency: 'USD':true:'1.2-2'}}</td>
+      </tr>
+    </table>
+    <ul class="pagination pagination-sm">
+      <li *ngFor="let i of totalMealPageCount()" [ngClass]="{active: i === mealCurrentPage}" (click)="mealCurrentPage=i;"><a>{{i}}</a></li>
+    </ul>
+    <div class="text-right right-button">
+      <button class="btn btn-success" [routerLink]="['../new-meal']">New Meal</button>
     </div>
   </div>
-  <br/>
-  <div class="modify-group btn-group">
-    <button class="btn btn-primary">Add Meal</button>
+  <div class="row table-row">
+    <h4>Ingredient Inventory</h4>
+    <div class="input-group">
+      <input type="text" class="form-control" [(ngModel)]="ingredientSearchString" placeholder="Search Ingredients">
+      <div class="input-group-btn">
+        <button class="btn btn-primary search-button">Search</button>
+      </div>
+    </div>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Inventory</th>
+        <th>Price/Item</th>
+        <th>Threshold</th>
+      </tr>
+      <tr *ngFor="let ingredient of getPaginatedIngredients()">
+        <td><a [routerLink]="['../ingredient-info', ingredient.id]">{{ingredient.name}}</a></td>
+        <td>{{ingredient.category_name}}</td>
+        <td>{{ingredient.num_of_items}}</td>
+        <td>{{ingredient.price_per_item | currency:'USD':true:'1.2-2'}}</td>
+        <td>{{ingredient.threshold}}</td>
+      </tr>
+    </table>
+    <ul class="pagination pagination-sm">
+      <li *ngFor="let i of totalIngredientPageCount()" [ngClass]="{active: i === ingredientCurrentPage}" (click)="ingredientCurrentPage=i;"><a>{{i}}</a></li>
+    </ul>
+    <div class="text-right right-button">
+      <button class="btn btn-success" [routerLink]="['../new-ingredient']">New Ingredient</button>
+    </div>
   </div>
-  <br/>
-  <br/>
-  <table class="table">
-    <tr>
-      <th>
-
-      </th>
-      <th>Name</th>
-      <th>Cuisine</th>
-      <th>Description</th>
-      <th>Price</th>
-    </tr>
-    <tr *ngFor="let meal of this.meals; let i = index" id="row-{{i}}">
-      <td class="modify-btn-group">
-        <button class="btn btn-danger btn-xs" (click)="deleteMeal(meal)">X</button>
-      </td>
-      <td><a [routerLink]="['../meal-info', meal.id]">{{meal.name}}</a></td>
-      <td>{{meal.cuisine}}</td>
-      <td>{{meal.description}}</td>
-      <td>{{meal.price | currency: 'USD':true:'1.2-2'}}</td>
-    </tr>
-  </table>
 </div>

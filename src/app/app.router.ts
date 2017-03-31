@@ -17,7 +17,13 @@ import {HomeAdminComponent} from './components/home-admin/home-admin.component';
 import {FoodReportComponent} from './components/food-report/food-report.component';
 import {ApproveIngredientOrderComponent} from './components/approve-ingredient-order/approve-ingredient-order.component';
 import {PlaceIngredientOrderComponent} from './components/place-ingredient-order/place-ingredient-order.component';
+
 import {ChangeRoleAdminComponent} from "./components/change-role-admin/change-role-admin.component";
+
+import {NewMealComponent} from "./components/new-meal/new-meal.component";
+import {NewIngredientComponent} from "./components/new-ingredient/new-ingredient.component";
+import {IngredientInfoComponent} from "./components/ingredient-info/ingredient-info.component";
+
 
 export const router: Routes = [
   {
@@ -57,11 +63,11 @@ export const router: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'browse-meals',
+        redirectTo: 'inventory',
         pathMatch: 'full'
       },
       {
-        path: 'browse-meals',
+        path: 'inventory',
         component: BrowseMealsComponent
       },
       {
@@ -71,6 +77,18 @@ export const router: Routes = [
       {
         path: 'meal-info/:id',
         component: MealInfoComponent
+      },
+      {
+        path: 'new-meal',
+        component: NewMealComponent
+      },
+      {
+        path: 'new-ingredient',
+        component: NewIngredientComponent
+      },
+      {
+        path: 'ingredient-info/:id',
+        component: IngredientInfoComponent
       }
     ]
   },
@@ -81,6 +99,10 @@ export const router: Routes = [
       {
         path: 'food-reports',
         component: FoodReportComponent
+      },
+      {
+        path: 'meal-info/:id',
+        component: MealInfoComponent
       },
       {
         path: '',
