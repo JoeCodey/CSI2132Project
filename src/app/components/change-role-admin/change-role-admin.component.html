@@ -13,7 +13,6 @@
         </div>
       </div>
     </div>
-  <br>
   <table class="table">
     <tr>
       <th>User Id</th>
@@ -29,9 +28,9 @@
       <td>{{user.name}}</td>
       <td>{{user.email}}</td>
       <td>{{user.role}}</td>
-      <div class="checkbox">
-        <label><input type="checkbox" [(ngModel)]="checkBoxValue">Select </label>
-      </div>
+      <td>
+        <input #{{user.id}}  [(ngModel)]="user.selected" type="checkbox" (change)="checkbox(user)">
+      </td>
     </tr>
 
   </table>

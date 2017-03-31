@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FoodService} from "../../services/food.service";
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import {router} from "../../app.router";
 
 @Component({
   selector: 'app-get-ingredients',
