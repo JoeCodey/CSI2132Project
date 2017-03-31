@@ -20,8 +20,24 @@ export class MealRequestsComponent implements OnInit {
   }
 
   public getActiveRequests(){
-    console.log(this.mealRequests);
     return this.mealRequests.filter((item) => {return item.active === true;});
+  }
+
+  public serveMealRequest(id: number){
+    let that = this;
+    this.mealsService.deactivateMealRequest(id).subscribe(
+      (data) => {
+        console.log(data['Message']);
+        for(let request of that.mealRequests){
+          if(request.order_num === id){
+            request.active = false;
+          }
+        }
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 
   ngOnInit() {
