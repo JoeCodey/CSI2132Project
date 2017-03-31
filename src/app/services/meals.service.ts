@@ -55,4 +55,8 @@ export class MealsService {
   public getMealRequestIngredients(id: number){
     return this.http.get(this.mealRequestEndpoint+'/'+id).map(res => res.json()).catch(this.handleError);
   }
+
+  public deactivateMealRequest(id: number){
+    return this.http.put(this.mealRequestEndpoint+'/'+id, {order_num: id}).map(res => res.json()).catch(this.handleError);
+  }
 }

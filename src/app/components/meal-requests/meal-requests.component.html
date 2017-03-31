@@ -8,7 +8,7 @@
   </div>
   <table class="table">
     <tr>
-      <th>Order #</th>
+      <th>Request #</th>
       <th>Meal Name</th>
       <th>Requester</th>
       <th>Count</th>
@@ -20,7 +20,7 @@
       <td>{{mealReq.requested_by}}</td>
       <td>{{mealReq.count}}</td>
       <td>
-        <button class="btn-primary">Serve</button>
+        <button class="btn-primary" (click)="serveMealRequest(mealReq.order_num)">Serve</button>
       </td>
     </tr>
   </table>

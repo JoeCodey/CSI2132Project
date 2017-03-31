@@ -110,4 +110,16 @@ router.delete('/meal-requests/:id', function (req, res) {
     });
 });
 
+router.put('/meal-requests/:id', function (req, res) {
+  var query = 'UPDATE "Project".meal_request SET ACTIVE = false WHERE order_num = $1';
+  db(query, [req.body.order_num], function (err) {
+    if (err){
+      res.status(500).json(err);
+    }
+    else{
+      res.status(200).json({'Message': 'Updated. Meal Request deactivated'});
+    }
+  })
+});
+
 module.exports = router;

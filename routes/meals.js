@@ -118,7 +118,6 @@ router.put('/meals/:id', function (req, res) {
 router.delete('/meals/:id', function (req, res) {
     db('DELETE FROM "Project".meal WHERE ID = $1', [req.params.id], function (err) {
         if(err){
-          console.log(err);
             res.status(500).json(err);
         }
         else{
