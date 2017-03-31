@@ -1,0 +1,21 @@
+.error{
+  color: red;
+}
+.error li{
+  color: red;
+}
+input.ng-dirty.ng-invalid{
+  border: 1px solid red;
+}
+.input-box, .output-box{
+  background-color: #efefef;
+  padding: 20px;
+}
+.ingredient-list{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.submit-button{
+  padding-left: 50px;
+  padding-right: 50px;
+}

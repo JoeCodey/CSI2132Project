@@ -11,6 +11,7 @@ import { HomeUserComponent } from './components/home-user/home-user.component';
 import {FoodService} from "./services/food.service";
 import {RouterModule} from "@angular/router";
 import {MealsService} from "./services/meals.service";
+import {IngredientOrderService} from './services/ingredient-order.service';
 import { OrderMealComponent } from './components/order-meal/order-meal.component';
 import { GetIngredientsComponent } from './components/get-ingredients/get-ingredients.component';
 import { CheckoutSuccessComponent } from './components/checkout-success/checkout-success.component';
@@ -23,8 +24,15 @@ import {FoodReportComponent}from  './components/food-report/food-report.componen
 import { ApproveIngredientOrderComponent } from './components/approve-ingredient-order/approve-ingredient-order.component';
 import { PlaceIngredientOrderComponent } from './components/place-ingredient-order/place-ingredient-order.component';
 import {AdminService} from "./services/admin.service";
+
 import {UserService} from "./services/user.service";
 import { ChangeRoleAdminComponent } from './components/change-role-admin/change-role-admin.component';
+
+import { NewMealComponent } from './components/new-meal/new-meal.component';
+import { NewIngredientComponent } from './components/new-ingredient/new-ingredient.component';
+import {CategoryService} from "./services/category.service";
+import { IngredientInfoComponent } from './components/ingredient-info/ingredient-info.component';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +50,13 @@ import { ChangeRoleAdminComponent } from './components/change-role-admin/change-
     FoodReportComponent,
     ApproveIngredientOrderComponent,
     PlaceIngredientOrderComponent,
+
     ChangeRoleAdminComponent
+
+    NewMealComponent,
+    NewIngredientComponent,
+    IngredientInfoComponent
+
   ],
   imports: [
     BrowserModule,
@@ -52,7 +66,10 @@ import { ChangeRoleAdminComponent } from './components/change-role-admin/change-
     RouterModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService, FoodService, MealsService, AdminService, UserService],
+
+
+  providers: [AuthService, FoodService, MealsService, AdminService, IngredientOrderService, CategoryService,UserService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

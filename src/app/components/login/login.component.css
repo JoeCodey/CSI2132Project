@@ -12,9 +12,9 @@
   padding-left: 50px;
   padding-right: 50px;
 }
-.error li{
+.error{
   color: red;
 }
-input.ng-dirty.ng-invalid{
+input.ng-dirty.ng-invalid, textarea.ng-dirty.ng-invalid{
   border: 1px solid red;
 }

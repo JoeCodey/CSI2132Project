@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class GetIngredientsComponent implements OnInit {
   public ingredients : any = [];
   public searchString : string = '';
-  public itemsPerPage : number = 5;
+  public itemsPerPage : number = 10;
   public currentPage : number = 1;
   constructor(public foodService : FoodService, public parentRouter : Router, public activatedRoute : ActivatedRoute) {
     let successHandler = (data) => {

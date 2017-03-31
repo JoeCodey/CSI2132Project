@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Create New Ingredient</h2>
+  <div class="row">
+    <div class="col-xs-6">
+      <form class="input-box" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input class="form-control" type="text" id="name" name="name" #name="ngModel" [(ngModel)]="newIngredient.name"
+                 required placeholder="Enter Ingredient Name"/>
+          <div class="alert alert-danger" *ngIf="name.errors && (name.dirty || name.touched)">
+            <div>Name is Required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="categoryName">Category Name</label>
+          <select class="form-control" [(ngModel)]="newIngredient.category_name" id="categoryName"
+                  name="categoryName" #categoryName="ngModel" required>
+            <option *ngFor="let category of categories" value="{{category.category_name}}">{{category.category_name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="threshold">Threshold</label>
+          <input type="number" class="form-control" id="threshold" name="threshold" #threshold="ngModel"
+                 [(ngModel)]="newIngredient.threshold" required placeholder="Enter a Threshold Value" [ngClass]="{'error-border': integerError}" (ngModelChange)="changeThreshold()">
+          <div class="alert-danger alert" *ngIf="( integerError || threshold.errors) && (threshold.dirty || threshold.touched)">
+            <div>Threshold must be a valid integer</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pricePerItem">Price Per Item</label>
+          <input type="number" class="form-control" id="pricePerItem" name="pricePerItem" #pricePerItem="ngModel"
+                 [(ngModel)]="newIngredient.price_per_item" required placeholder="Enter a Price ($)" step="0.01">
+        </div>
+        <div class="text-center">
+          <button class="btn btn-success" (click)="createIngredient()" [disabled]="name.invalid || integerError || threshold.invalid">
+            Create Ingredient
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

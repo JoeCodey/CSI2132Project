@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {IngredientOrderService} from "../../services/ingredient-order.service";
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import {FoodService} from '../../services/food.service';
-import {router} from "../../app.router";
+import {FoodService} from "../../services/food.service";
+import {MealsService} from "../../services/meals.service";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-place-ingredient-order',
-  templateUrl: './place-ingredient-order.component.html',
-  styleUrls: ['./place-ingredient-order.component.css']
+  selector: 'app-new-meal',
+  templateUrl: './new-meal.component.html',
+  styleUrls: ['./new-meal.component.css']
 })
-export class PlaceIngredientOrderComponent implements OnInit {
+export class NewMealComponent implements OnInit {
+
+  public newMeal : any = {};
+  public descriptionMaxLength : number = 130;
   public ingredients : any = [];
-  public searchString : string = '';
-  public itemsPerPage : number = 5;
   public currentPage : number = 1;
-  constructor(public placeOrderService : FoodService, public parentRouter : Router, public activatedRoute : ActivatedRoute) {
+  public itemsPerPage : number = 5;
+  public searchString : string = '';
+  constructor(private foodService : FoodService, private mealService: MealsService, private parentRouter : Router) {
     let successHandler = (data) => {
       this.ingredients = data;
       for (let ingredient of this.ingredients){
@@ -26,16 +27,18 @@ export class PlaceIngredientOrderComponent implements OnInit {
     let errorHandler = (err) => {
       console.error(err);
     };
-    this.placeOrderService.listAllFood().subscribe(successHandler, errorHandler);
+    this.foodService.listAllFood().subscribe(successHandler, errorHandler);
   }
-  public selectIngredient(ingredient: any){
-    let index = this.ingredients.indexOf(ingredient);
-    if (index < 0){
-      return;
-    }
-    this.ingredients[index].selected = !this.ingredients[index].selected;
-  }
+
   ngOnInit() {
+  }
+  public remainingCharacters(){
+    if (!this.newMeal.description){
+      return this.descriptionMaxLength;
+    }
+    else{
+      return this.descriptionMaxLength - this.newMeal.description.length;
+    }
   }
   public selectItem(ingredient : any){
     ingredient.selected = true;
@@ -47,9 +50,6 @@ export class PlaceIngredientOrderComponent implements OnInit {
     ingredient.count = 0;
   }
   public incrementItem(ingredient: any){
-    if (ingredient.count === ingredient.num_of_items){
-      return;
-    }
     ingredient.count++;
   }
   public decrementItem(ingredient: any){
@@ -98,18 +98,14 @@ export class PlaceIngredientOrderComponent implements OnInit {
     }
     return totalPrice;
   }
-
-
-  public checkout(){
-    let errorHandler = (err) => {
-      console.error(err);
-    };
-    let successHandler = (success) => {
-      this.parentRouter.navigateByUrl('/home-user/checkout-success').catch(err => {
+  public createMeal(){
+    this.mealService.createMeal(this.newMeal, this.getSelectedIngredients()).subscribe(data => {
+      console.log(data);
+      this.parentRouter.navigateByUrl('/home-chef/meal-info/'+data.id).catch(err =>{
         console.error(err);
       });
-    };
-    this.placeOrderService.checkout(this.getSelectedIngredients()).subscribe(successHandler, errorHandler);
+    }, err => {
+      console.error(err);
+    });
   }
-
 }
