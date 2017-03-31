@@ -116,14 +116,13 @@ export const router: Routes = [
       {
         path: 'place-ingredient-order',
         component: PlaceIngredientOrderComponent
-      }
-      ,{
+      },
+      {
         path: 'change-role',
         component: ChangeRoleAdminComponent
       }
     ]
-  },
-
+  }
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

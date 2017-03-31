@@ -52,7 +52,7 @@ import { IngredientInfoComponent } from './components/ingredient-info/ingredient
     PlaceIngredientOrderComponent,
 
     ChangeRoleAdminComponent,
-
+    
     NewMealComponent,
     NewIngredientComponent,
     IngredientInfoComponent

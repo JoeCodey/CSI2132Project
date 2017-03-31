@@ -16,10 +16,10 @@ create table category(
 );
 create table food(
 	id serial not null,
-	name varchar(20) unique not null,
+	name varchar(40) unique not null,
 	category_name varchar(20) not null,
 	price_per_item float not null,
-	num_of_items integer not null default 0,
+	num_of_items iqnteger not null default 0,
 	threshold float,
 	primary key (id),
 	foreign key (category_name) references category(category_name)
