@@ -16,6 +16,7 @@ export class NewMealComponent implements OnInit {
   public currentPage : number = 1;
   public itemsPerPage : number = 5;
   public searchString : string = '';
+  public nameError : boolean = false;
   constructor(private foodService : FoodService, private mealService: MealsService, private parentRouter : Router) {
     let successHandler = (data) => {
       this.ingredients = data;
@@ -106,6 +107,10 @@ export class NewMealComponent implements OnInit {
       });
     }, err => {
       console.error(err);
+      this.nameError = true;
     });
+  }
+  public resetNameError(){
+    this.nameError = false;
   }
 }
