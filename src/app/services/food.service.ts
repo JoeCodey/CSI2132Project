@@ -23,6 +23,9 @@ export class FoodService {
   public getFood(id : string) : Observable<any>{
     return this.http.get(this.foodEndpoint+'/'+id).map(res => res.json()).catch(this.handleError);
   }
+  public createFood(food : any){
+    return this.http.post(this.foodEndpoint, food).map(res => res.json()).catch(this.handleError);
+  }
   public checkout(items: [any]): Observable<any>{
     let data = {
       items: items

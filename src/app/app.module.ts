@@ -25,6 +25,9 @@ import { ApproveIngredientOrderComponent } from './components/approve-ingredient
 import { PlaceIngredientOrderComponent } from './components/place-ingredient-order/place-ingredient-order.component';
 import {AdminService} from "./services/admin.service";
 import { NewMealComponent } from './components/new-meal/new-meal.component';
+import { NewIngredientComponent } from './components/new-ingredient/new-ingredient.component';
+import {CategoryService} from "./services/category.service";
+import { IngredientInfoComponent } from './components/ingredient-info/ingredient-info.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { NewMealComponent } from './components/new-meal/new-meal.component';
     FoodReportComponent,
     ApproveIngredientOrderComponent,
     PlaceIngredientOrderComponent,
-    NewMealComponent
+    NewMealComponent,
+    NewIngredientComponent,
+    IngredientInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,7 @@ import { NewMealComponent } from './components/new-meal/new-meal.component';
     RouterModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService, FoodService, MealsService, AdminService, IngredientOrderService],
+  providers: [AuthService, FoodService, MealsService, AdminService, IngredientOrderService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

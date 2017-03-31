@@ -7,13 +7,17 @@ var db = require('../functions/db');
 var query = require('../functions/query');
 
 router.post('/food', function (req, res) {
+  console.log(req.body);
   var q = query.insert('Project', 'food', req.body);
-  db(q.query, q.params, function (err) {
+  console.log(q.query);
+  console.log(q.params);
+  db(q.query+' RETURNING id', q.params, function (err, results) {
     if (err) {
       res.status(500).json(err);
     }
     else {
-      res.status(201).json({'Message': 'Created'});
+      var id = results[0].id;
+      res.status(201).json({'Message': 'Created', id: id});
     }
   });
 });
