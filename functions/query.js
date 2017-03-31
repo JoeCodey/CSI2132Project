@@ -128,6 +128,7 @@ exports.insert = function (schema, tableName, obj) {
             params.push(obj[key]);
             if (count <= length){
                 keyString = keyString+', ';
+                valueString = valueString+', ';
             }
         }
     }

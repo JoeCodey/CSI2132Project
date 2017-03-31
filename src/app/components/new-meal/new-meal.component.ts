@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FoodService} from "../../services/food.service";
 import {MealsService} from "../../services/meals.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-meal',
@@ -15,7 +16,7 @@ export class NewMealComponent implements OnInit {
   public currentPage : number = 1;
   public itemsPerPage : number = 5;
   public searchString : string = '';
-  constructor(private foodService : FoodService, private mealService: MealsService) {
+  constructor(private foodService : FoodService, private mealService: MealsService, private parentRouter : Router) {
     let successHandler = (data) => {
       this.ingredients = data;
       for (let ingredient of this.ingredients){
@@ -26,7 +27,7 @@ export class NewMealComponent implements OnInit {
     let errorHandler = (err) => {
       console.error(err);
     };
-    this.foodService.listFood().subscribe(successHandler, errorHandler);
+    this.foodService.listAllFood().subscribe(successHandler, errorHandler);
   }
 
   ngOnInit() {
@@ -100,7 +101,9 @@ export class NewMealComponent implements OnInit {
   public createMeal(){
     this.mealService.createMeal(this.newMeal, this.getSelectedIngredients()).subscribe(data => {
       console.log(data);
-      console.log('Good');
+      this.parentRouter.navigateByUrl('/home-chef/meal-info/'+data.id).catch(err =>{
+        console.error(err);
+      });
     }, err => {
       console.error(err);
     });

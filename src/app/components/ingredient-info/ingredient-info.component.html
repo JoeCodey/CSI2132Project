@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Ingredient: {{ingredient.name}}</h2>
+  <table class="table">
+    <tr>
+      <th>Category</th>
+      <td>{{ingredient.category_name}}</td>
+    </tr>
+    <tr>
+      <th>Price Per Item</th>
+      <td>{{ingredient.price_per_item | currency:'USD':true:'1.2-2'}}</td>
+    </tr>
+    <tr>
+      <th>Threshold</th>
+      <td>{{ingredient.threshold}}</td>
+    </tr>
+  </table>
+</div>

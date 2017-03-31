@@ -54,7 +54,7 @@ router.post('/meals', function (req, res) {
 
 router.get('/meals', function (req, res) {
     if (req.query.ignoreNone){
-      db('SELECT * FROM "Project".meal', [], function (err, results) {
+      db('SELECT id, name, cuisine, description, (SELECT SUM(f.price_per_item * ifor.count) FROM "Project".ingredient_for as ifor, "Project".food as f WHERE f.id = ifor.food_id AND ifor.meal_id = m.id) as price FROM "Project".meal as m', [], function (err, results) {
         if (err){
           res.status(500).json(err);
         }
