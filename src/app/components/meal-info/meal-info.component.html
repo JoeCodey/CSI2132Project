@@ -12,9 +12,18 @@
     <tr>
       <th>Ingredients</th>
       <td>
-        <ul>
-          <li *ngFor="let ingredient of meal.ingredients">{{ingredient.name + " (" + ingredient.count + ")"}}</li>
-        </ul>
+        <table class="ingr-table">
+          <tr>
+            <th></th>
+            <th>Required</th>
+            <th>Available</th>
+          </tr>
+          <tr *ngFor="let ingredient of meal.ingredients">
+            <td>{{ingredient.name}}</td>
+            <td>{{ingredient.count}}</td>
+            <td>{{ingredient.count_available}}</td>
+          </tr>
+        </table>
       </td>
     </tr>
 
