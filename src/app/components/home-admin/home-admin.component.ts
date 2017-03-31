@@ -37,8 +37,12 @@ export class HomeAdminComponent implements OnInit {
   public isPlaceIngredientOrders(){
     return this.parentRouter.url === '/home-admin/place-ingredient-order';
   }
+  public isChangeRole(){
+    return this.parentRouter.url === '/home-admin/change-role';
+  }
   public isOther(){
-    return !this.isReports() && !this.isApproveIngredientOrders() && !this.isPlaceIngredientOrders();
+    return !this.isReports() && !this.isApproveIngredientOrders() && !this.isPlaceIngredientOrders()
+      && !this.isChangeRole();
   }
   ngOnInit() {
 
