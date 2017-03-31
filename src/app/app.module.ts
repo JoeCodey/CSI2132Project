@@ -23,6 +23,8 @@ import {FoodReportComponent}from  './components/food-report/food-report.componen
 import { ApproveIngredientOrderComponent } from './components/approve-ingredient-order/approve-ingredient-order.component';
 import { PlaceIngredientOrderComponent } from './components/place-ingredient-order/place-ingredient-order.component';
 import {AdminService} from "./services/admin.service";
+import {UserService} from "./services/user.service";
+import { ChangeRoleAdminComponent } from './components/change-role-admin/change-role-admin.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import {AdminService} from "./services/admin.service";
     HomeAdminComponent,
     FoodReportComponent,
     ApproveIngredientOrderComponent,
-    PlaceIngredientOrderComponent
+    PlaceIngredientOrderComponent,
+    ChangeRoleAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,7 @@ import {AdminService} from "./services/admin.service";
     RouterModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService, FoodService, MealsService, AdminService],
+  providers: [AuthService, FoodService, MealsService, AdminService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
