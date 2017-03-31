@@ -38,6 +38,12 @@ export class FoodService {
     };
     return this.http.put(this.foodEndpoint+'/checkout', data).map(res => res.json()).catch(this.handleError);
   }
+  public restock(items: [any]) : Observable<any>{
+    let data = {
+      items: items
+    };
+    return this.http.put(this.foodEndpoint+'/restock', data).map(res => res.json()).catch(this.handleError);
+  }
   public handleError(err) : Observable<any>{
     return Observable.throw(err.json().error || 'Server Error');
   }

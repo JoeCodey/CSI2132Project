@@ -67,7 +67,7 @@ router.get('/auth/:token', function (req, res) {
 });
 
 router.get('/users', function (req, res) {
-    db('SELECT id,name,email,role FROM "Project".db_user', [req.params.id], function (err, results) {
+    db('SELECT id, name, email, role FROM "Project".db_user', [req.params.id], function (err, results) {
       if (err){
           res.status(500).json(err);
       }
