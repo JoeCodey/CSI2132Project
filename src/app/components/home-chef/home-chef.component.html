@@ -6,25 +6,25 @@
     <ul class="nav navbar-nav navbar-right" *ngIf="isInventory()">
       <li class="active"><a>Inventory</a></li>
       <li><a [routerLink]="['meal-requests']">Meal Requests</a></li>
-      <li><a [routerLink]="['request-ingredient-order']">Place Ingredient Order</a></li>
+      <li><a [routerLink]="['request-ingredient-order']">Request Ingredient Order</a></li>
       <li><a (click)="logout()">Logout</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" *ngIf="isMealRequests()">
       <li><a [routerLink]="['inventory']">Inventory</a></li>
       <li class="active"><a>Meal Requests</a></li>
-      <li><a [routerLink]="['request-ingredient-order']">Place Ingredient Order</a></li>
+      <li><a [routerLink]="['request-ingredient-order']">Request Ingredient Order</a></li>
       <li><a (click)="logout()">Logout</a> </li>
     </ul>
     <ul class="nav navbar-nav navbar-right" *ngIf="isRequestIngredientOrder()">
       <li><a [routerLink]="['inventory']">Inventory</a></li>
       <li><a [routerLink]="['meal-requests']">Meal Requests</a></li>
-      <li class="active"><a>Place Ingredient Order</a></li>
+      <li class="active"><a>Request Ingredient Order</a></li>
       <li><a (click)="logout()">Logout</a> </li>
     </ul>
     <ul class="nav navbar-nav navbar-right" *ngIf="isOther()">
       <li><a [routerLink]="['inventory']">Inventory</a></li>
       <li><a [routerLink]="['meal-requests']">Meal Requests</a></li>
-      <li><a [routerLink]="['request-ingredient-order']">Place Ingredient Order</a></li>
+      <li><a [routerLink]="['request-ingredient-order']">Request Ingredient Order</a></li>
       <li><a (click)="logout()">Logout</a> </li>
     </ul>
   </div>

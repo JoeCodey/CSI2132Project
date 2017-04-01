@@ -55,9 +55,6 @@ export class RequestIngredientOrderComponent implements OnInit {
     }
   }
   public incrementItem(ingredient: any){
-    if (ingredient.count === ingredient.num_of_items){
-      return;
-    }
     ingredient.count++;
   }
   public decrementItem(ingredient: any){
