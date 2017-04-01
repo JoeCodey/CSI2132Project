@@ -27,7 +27,7 @@ router.get('/admin/most-expensive-meal', function (req, res) {
 });
 
 router.get('/admin/top-3-used', function (req, res) {
-  var query = 'SELECT id, name, category_name, price_per_item, num_of_items, threshold, (SELECT SUM(count) FROM "Project".ingredient_for as ifor WHERE ifor.food_id = f.id) as frequency FROM "Project".food as f order by frequency limit 3 ';
+  var query = 'SELECT id, name, category_name, price_per_item, num_of_items, threshold, (SELECT SUM(count) FROM "Project".ingredient_for as ifor WHERE ifor.food_id = f.id) as frequency FROM "Project".food as f, "Project".ingredient_for as ifor2 WHERE f.id=ifor2.food_id AND ifor2.count IS NOT NULL order by frequency desc limit 3';
   db(query, [], function (err, results) {
     if (err){
       res.status(500).json(err);
