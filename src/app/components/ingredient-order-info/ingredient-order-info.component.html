@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>Order: #{{order.id}}</h2>
+  <br/>
+  <table class="table order-info-table">
+    <tr>
+      <th>Status</th>
+      <td *ngIf="order.approved"> Approved </td>
+      <td *ngIf="!order.approved"> Pending </td>
+    </tr>
+    <tr *ngIf="order.approved">
+      <th>Approved By</th>
+      <td>{{order.approved_by_name}}</td>
+    </tr>
+    <tr>
+      <th>Requested By</th>
+      <td>{{order.requester_name}}</td>
+    </tr>
+    <tr>
+      <th>Ingredients</th>
+      <td>
+        <table class="ingr-table">
+          <tr>
+            <th>Name</th>
+            <th>Unit Price</th>
+            <th>Number Ordered</th>
+            <th>Total</th>
+          </tr>
+          <tr *ngFor="let ingredient of order.ingredients">
+            <td>{{ingredient.name}}</td>
+            <td>{{ingredient.price_per_item | currency: 'USD':true:'1.2-2'}}</td>
+            <td>{{ingredient.count_required}}</td>
+            <td>{{(ingredient.price_per_item*ingredient.count_required) | currency: 'USD':true:'1.2-2'}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <th>Total Cost</th>
+      <td>{{getTotalCost() | currency: 'USD':true:'1.2-2'}}</td>
+    </tr>
+  </table>
+
+  <div class="text-right" *ngIf="!order.approved">
+    <button class="btn btn-success" (click)="approveIngredientOrder()">
+      Approve
+      <span class="glyphicon glyphicon-ok"></span>
+    </button>
+    <button class="btn btn-danger" (click)="deleteIngredientOrder()">
+      Decline
+      <span class="glyphicon glyphicon-remove"></span>
+    </button>
+  </div>
+</div>

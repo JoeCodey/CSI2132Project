@@ -15,7 +15,6 @@ import {MealInfoComponent} from './components/meal-info/meal-info.component';
 import {MealRequestsComponent} from './components/meal-requests/meal-requests.component'
 import {HomeAdminComponent} from './components/home-admin/home-admin.component';
 import {FoodReportComponent} from './components/food-report/food-report.component';
-import {ApproveIngredientOrderComponent} from './components/approve-ingredient-order/approve-ingredient-order.component';
 import {PlaceIngredientOrderComponent} from './components/place-ingredient-order/place-ingredient-order.component';
 
 import {ChangeRoleAdminComponent} from './components/change-role-admin/change-role-admin.component';
@@ -23,6 +22,9 @@ import {ChangeRoleAdminComponent} from './components/change-role-admin/change-ro
 import {NewMealComponent} from './components/new-meal/new-meal.component';
 import {NewIngredientComponent} from './components/new-ingredient/new-ingredient.component';
 import {IngredientInfoComponent} from './components/ingredient-info/ingredient-info.component';
+
+import {ApproveIngredientOrderComponent} from './components/approve-ingredient-order/approve-ingredient-order.component';
+import {IngredientOrderInfoComponent} from "./components/ingredient-order-info/ingredient-order-info.component";
 
 
 export const router: Routes = [
@@ -112,6 +114,10 @@ export const router: Routes = [
       {
         path: 'approve-ingredient-order',
         component: ApproveIngredientOrderComponent
+      },
+      {
+        path: 'ingredient-order-info/:id',
+        component: IngredientOrderInfoComponent
       },
       {
         path: 'place-ingredient-order',

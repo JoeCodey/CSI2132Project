@@ -16,6 +16,7 @@ var meals = require('./routes/meals');
 var categories = require('./routes/categories');
 var food = require('./routes/food');
 var mealRequests = require('./routes/meal-requests');
+var ingredientOrders = require('./routes/ingredient-orders');
 var admin = require('./routes/admin');
 var ingredientOrders = require('./routes/ingredient-orders');
 var uuid4 = require('uuid/v4');
