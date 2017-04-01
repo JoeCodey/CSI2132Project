@@ -53,7 +53,7 @@ export class PlaceIngredientOrderComponent implements OnInit {
     ingredient.count++;
   }
   public decrementItem(ingredient: any){
-    if (ingredient.count <= 1){
+    if (ingredient.count <= 0){
       return;
     }
     ingredient.count--;
@@ -99,7 +99,6 @@ export class PlaceIngredientOrderComponent implements OnInit {
     return totalPrice;
   }
 
-
   public checkout(){
     let errorHandler = (err) => {
       console.error(err);
@@ -109,7 +108,8 @@ export class PlaceIngredientOrderComponent implements OnInit {
         console.error(err);
       });
     };
-    this.placeOrderService.checkout(this.getSelectedIngredients()).subscribe(successHandler, errorHandler);
+    this.placeOrderService.restock(this.getSelectedIngredients()).subscribe(successHandler, errorHandler);
   }
+// Original get_ingredients checkout changed to RESTOCK here ^^^
 
 }
