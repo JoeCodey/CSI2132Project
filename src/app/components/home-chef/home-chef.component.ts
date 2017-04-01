@@ -15,7 +15,7 @@ export class HomeChefComponent implements OnInit {
   ngOnInit() {
   }
   public isOther(){
-    return  !this.isInventory() && !this.isMealRequests();
+    return  !this.isInventory() && !this.isMealRequests() && !this.isRequestIngredientOrder();
   }
   public isInventory(){
     return this.parentRouter.url === '/home-chef/inventory';
@@ -23,6 +23,11 @@ export class HomeChefComponent implements OnInit {
   public isMealRequests(){
     return this.parentRouter.url === '/home-chef/meal-requests';
   }
+  public isRequestIngredientOrder(){
+    return this.parentRouter.url === '/home-chef/request-ingredient-order';
+  }
+
+
   logout(){
     this.authService.logout();
     this.parentRouter.navigateByUrl('/login').catch(err => {

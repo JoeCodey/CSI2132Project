@@ -33,6 +33,7 @@ import { NewIngredientComponent } from './components/new-ingredient/new-ingredie
 import {CategoryService} from "./services/category.service";
 import { IngredientInfoComponent } from './components/ingredient-info/ingredient-info.component';
 import { IngredientOrderInfoComponent } from './components/ingredient-order-info/ingredient-order-info.component';
+import { RequestIngredientOrderComponent } from './components/request-ingredient-order/request-ingredient-order.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { IngredientOrderInfoComponent } from './components/ingredient-order-info
     NewMealComponent,
     NewIngredientComponent,
     IngredientInfoComponent,
-    IngredientOrderInfoComponent
+    IngredientOrderInfoComponent,
+    RequestIngredientOrderComponent
 
   ],
   imports: [

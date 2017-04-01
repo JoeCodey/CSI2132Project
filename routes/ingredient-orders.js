@@ -8,14 +8,34 @@ var query = require('../functions/query');
 
 router.post('/ingredient-orders', function (req, res) {
     //TODO: Change this to authenticated user
-    var q = query.insert('Project', 'ingredient_order', req.body);
-    db(q.query, q.params, function (err) {
-        if(err){
+    var q1 = 'INSERT INTO "Project".ingredient_order (approved, requester_id) VALUES '
+              + '(false, $1) RETURNING id';
+
+    db(q1, [req.body.requester_id], function (err, results) {
+      if(err){
+        res.status(500).json(err);
+      }
+      else{
+        var order_id = results[0].id;
+        var q2 = 'INSERT INTO "Project".order_contains (order_id, food_id, count) VALUES '
+        var ingredients = req.body.ingredients;
+        for(var i=0; i<ingredients.length; i++){
+          q2 += '(' + order_id + ',' + ingredients[i].id + ',' + ingredients[i].count + ') ';
+          if(i < ingredients.length-1){
+            q2 += ', ';
+          }
+        }
+        q2 += ';';
+        db(q2, [], function(err, results){
+          if(err){
             res.status(500).json(err);
-        }
-        else{
-            res.status(201).json({'Message': 'Created'});
-        }
+          }
+          else{
+            res.status(204).end();
+          }
+        });
+      }
+
     });
 });
 
