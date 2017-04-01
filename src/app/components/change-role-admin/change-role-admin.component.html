@@ -1,18 +1,12 @@
 <div class="container">
   <h2>Change Roles of Users</h2> <br>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-10">
-              <button class="btn btn-primary search-button" (click)="makeChef()">Make Chef</button>
-              <button class="btn btn-primary search-button" (click)="makeUser()">Make User</button>
-              <button class="btn btn-primary search-button" (click)="makeAdmin()">Make Admin</button>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="input-group">
+    <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search Users">
+    <div class="input-group-btn">
+      <button class="btn btn-primary search-button" >Search</button>
     </div>
+  </div>
+
   <table class="table">
     <tr>
       <th>User Id</th>
@@ -29,7 +23,12 @@
       <td>{{user.email}}</td>
       <td>{{user.role}}</td>
       <td>
+        <button class="btn btn-primary search-button" (click)="makeChef(user)" *ngIf="user.role != 'chef'">Make Chef</button>
+        <button class="btn btn-primary search-button" (click)="makeUser(user)" *ngIf="user.role != 'user'">Make User</button>
+        <button class="btn btn-primary search-button" (click)="makeAdmin(user)" *ngIf="user.role != 'admin'">Make Admin</button>
+        <!--
         <input #{{user.id}}  [(ngModel)]="user.selected" type="checkbox" (change)="checkbox(user)">
+        -->
       </td>
     </tr>
 

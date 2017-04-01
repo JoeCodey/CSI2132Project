@@ -28,29 +28,9 @@ export class ChangeRoleAdminComponent implements OnInit {
   public currentPage : number = 1;
 
   constructor(public userService : UserService, public parentRouter: Router, public activatedRoute : ActivatedRoute) {
-    // let successHandler = (data) => {
-    //   this.users = data;
-    //   for(let user of this.users){
-    //     user.selected = false;
-    //   }
-    //   console.log(JSON.stringify(this.users));
-    // };
-    // let errorHandler = (err) => {
-    //   console.error(err);
-    // };
-
     this.userService.listUser().subscribe(data => {
       this.users = data;
-      for (let user of this.users){
-        user.selected = false ;
-      }
-      console.log("LOOK HERE A");
-      console.log(this.users);
     }, err => console.error(err));
-
-
-    //this.userService.listUser().subscribe(successHandler, errorHandler);
-
   }
   public totalPageCount() {
     let val = Math.ceil(this.spliceUsers().length / this.itemsPerPage);
@@ -75,26 +55,26 @@ export class ChangeRoleAdminComponent implements OnInit {
     return users.slice(first, last);
   }
 
-  public makeChef() {  //need to know which users are checked
-    let selectedUser = this.users.filter((x) => x.selected)
-    console.log(selectedUser);
-    for(let user of selectedUser){
-      this.userService.changeUser('chef',user.id) ;
-    }
+  public makeChef(user : any) {  //need to know which users are checked
+    this.userService.changeUser('chef', user.id).subscribe(data => {
+      user.role = 'chef';
+    }, err => {
+      console.error(err);
+    });
   }
-  public makeUser() {  //need to know which users are checked
-    let selectedUser = this.users.filter((x) => x.selected)
-    console.log(selectedUser);
-    for(let user of selectedUser){
-      this.userService.changeUser('user',user.id) ;
-    }
+  public makeUser(user : any) {  //need to know which users are checked
+    this.userService.changeUser('chef', user.id).subscribe(data => {
+      user.role = 'user';
+    }, err => {
+      console.error(err);
+    });
   }
-  public makeAdmin() {  //need to know which users are checked
-    let selectedUser = this.users.filter((x) => x.selected)
-    console.log(selectedUser);
-    for(let user of selectedUser){
-      this.userService.changeUser('admin',user.id) ;
-    }
+  public makeAdmin(user : any) {  //need to know which users are checked
+    this.userService.changeUser('chef', user.id).subscribe(data => {
+      user.role = 'admin';
+    }, err => {
+      console.error(err);
+    });
   }
   public checkbox(user) {
     user.selected = (user.selected) ? false : true ;
