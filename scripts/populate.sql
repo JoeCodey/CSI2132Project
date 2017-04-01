@@ -42,7 +42,7 @@ insert into ingredient_for (meal_id, food_id) values (2, 8);
 
 insert into meal_request (meal_id, requester_id) values (1, 6);
 
-insert into ingredient_order (requester_id) values (5);
+insert into ingredient_order (approved, requester_id) values (false, 5);
 
 insert into order_contains (order_id, food_id) values (1, 1);
 insert into order_contains (order_id, food_id) values (1, 2);
