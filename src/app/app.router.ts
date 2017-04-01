@@ -25,7 +25,7 @@ import {IngredientInfoComponent} from './components/ingredient-info/ingredient-i
 
 import {ApproveIngredientOrderComponent} from './components/approve-ingredient-order/approve-ingredient-order.component';
 import {IngredientOrderInfoComponent} from "./components/ingredient-order-info/ingredient-order-info.component";
-
+import {RequestIngredientOrderComponent} from './components/request-ingredient-order/request-ingredient-order.component';
 
 export const router: Routes = [
   {
@@ -91,6 +91,10 @@ export const router: Routes = [
       {
         path: 'ingredient-info/:id',
         component: IngredientInfoComponent
+      },
+      {
+        path: 'request-ingredient-order',
+        component: RequestIngredientOrderComponent
       }
     ]
   },

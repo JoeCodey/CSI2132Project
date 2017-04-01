@@ -19,7 +19,7 @@
       <td>{{order.id}}</td>
       <td>{{order.name}}</td>
       <td>{{order.price | currency: 'USD':true:'1.2-2'}}</td>
-      <td><button [routerLink]="['../ingredient-order-info/', order.id]" class="btn btn-secondary">View Details</button></td>
+      <td><button [routerLink]="['../ingredient-order-info/', order.id]" class="btn btn-sm btn-secondary">View Details</button></td>
     </tr>
   </table>
   <ul class="pagination pagination-sm">
@@ -46,7 +46,7 @@
       <td>{{order.id}}</td>
       <td>{{order.name}}</td>
       <td>{{order.price| currency: 'USD':true:'1.2-2'}}</td>
-      <td><button [routerLink]="['../ingredient-order-info', order.id]" class="btn btn-secondary">View Details</button></td>
+      <td><button [routerLink]="['../ingredient-order-info', order.id]" class="btn btn-sm btn-secondary">View Details</button></td>
     </tr>
   </table>
   <ul class="pagination pagination-sm">
