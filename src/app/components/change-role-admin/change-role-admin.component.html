@@ -23,9 +23,9 @@
       <td>{{user.email}}</td>
       <td>{{user.role}}</td>
       <td>
-        <button class="btn btn-primary search-button" (click)="makeChef(user)" *ngIf="user.role != 'chef'">Make Chef</button>
-        <button class="btn btn-primary search-button" (click)="makeUser(user)" *ngIf="user.role != 'user'">Make User</button>
-        <button class="btn btn-primary search-button" (click)="makeAdmin(user)" *ngIf="user.role != 'admin'">Make Admin</button>
+        <button class="btn btn-sm btn-primary " (clik)="makeChef(user)" *ngIf="user.role != 'chef'">Make Chef</button>
+        <button class="btn btn-sm btn-primary" (click)="makeUser(user)" *ngIf="user.role != 'user'">Make User</button>
+        <button class="btn btn-sm btn-primary" (click)="makeAdmin(user)" *ngIf="user.role != 'admin'">Make Admin</button>
         <!--
         <input #{{user.id}}  [(ngModel)]="user.selected" type="checkbox" (change)="checkbox(user)">
         -->

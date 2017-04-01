@@ -1,6 +1,6 @@
 CREATE TRIGGER food_threshold_trigger
-  BEFORE INSERT OR UPDATE OF num_of_items
+  AFTER INSERT OR UPDATE OF num_of_items
   ON "Project".food
   FOR EACH ROW
-  WHEN (NEW.num_of_items < NEW.threshold)
+  WHEN (((new.num_of_items)::double precision < new.threshold))
   EXECUTE PROCEDURE "Project".food_threshold();
