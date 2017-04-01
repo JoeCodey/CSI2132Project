@@ -28,7 +28,7 @@ export class RequestIngredientOrderComponent implements OnInit {
     let errorHandler = (err) => {
       console.error(err);
     };
-    this.foodService.listFood().subscribe(successHandler, errorHandler);
+    this.foodService.listAllFood().subscribe(successHandler, errorHandler);
   }
   public selectIngredient(ingredient: any){
     let index = this.ingredients.indexOf(ingredient);
