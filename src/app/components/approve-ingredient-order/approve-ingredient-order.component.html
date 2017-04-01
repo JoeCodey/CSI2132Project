@@ -1,1 +1,56 @@
-<p>Approve Ingedient Order Works</p>
+<div class="container">
+  <h2>Approve Ingredient Order </h2>
+  <h3>Pending Orders</h3>
+  <p>A list of pending ingredient orders that need approval.</p>
+  <div class="input-group">
+    <input type="text" class="form-control" [(ngModel)]="searchStringUnapproved" placeholder="Search By Requested By">
+    <div class="input-group-btn">
+      <button class="btn btn-primary search-button" >Search</button>
+    </div>
+  </div>
+  <table class="table">
+    <tr>
+      <th>Order #</th>
+      <th>Requested By</th>
+      <th>Price</th>
+      <th>Options</th>
+    </tr>
+    <tr *ngFor="let order of getPaginatedResults(false);">
+      <td>{{order.id}}</td>
+      <td>{{order.name}}</td>
+      <td>{{order.price | currency: 'USD':true:'1.2-2'}}</td>
+      <td><button [routerLink]="['../ingredient-order-info/', order.id]" class="btn btn-secondary">View Details</button></td>
+    </tr>
+  </table>
+  <ul class="pagination pagination-sm">
+    <li *ngFor="let i of totalPageCount(false)" [ngClass]="{active: i === currentPageApproved}" (click)="currentPageUnapproved=i;"><a>{{i}}</a></li>
+  </ul>
+  <br/>
+
+  <h3>Past Orders</h3>
+  <p>A list of ingredient orders that were approved in the past.</p>
+  <div class="input-group">
+    <input type="text" class="form-control" [(ngModel)]="searchStringUApproved" placeholder="Search By Requested By">
+    <div class="input-group-btn">
+      <button class="btn btn-primary search-button" >Search</button>
+    </div>
+  </div>
+  <table class="table">
+    <tr>
+      <th>Order #</th>
+      <th>Requested By</th>
+      <th>Price</th>
+      <th>Options</th>
+    </tr>
+    <tr *ngFor="let order of getPaginatedResults(true);">
+      <td>{{order.id}}</td>
+      <td>{{order.name}}</td>
+      <td>{{order.price| currency: 'USD':true:'1.2-2'}}</td>
+      <td><button [routerLink]="['../ingredient-order-info', order.id]" class="btn btn-secondary">View Details</button></td>
+    </tr>
+  </table>
+  <ul class="pagination pagination-sm">
+    <li *ngFor="let i of totalPageCount(true)" [ngClass]="{active: i === currentPageApproved}" (click)="currentPageApproved=i;"><a>{{i}}</a></li>
+  </ul>
+</div>
+

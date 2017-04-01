@@ -1,0 +1,24 @@
+th{
+  font-size: 1.2em;
+}
+
+td{
+  font-size: 1.1em;
+}
+
+.order-info-table th, .order-info-table td{
+  padding: 20px 0;
+}
+
+
+.ingr-table{
+  width: 100%;
+}
+.ingr-table th, .ingr-table td{
+  font-size: 1em;
+  padding: 0px 15px;
+  text-align: center;
+}
+
+
+

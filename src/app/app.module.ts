@@ -32,6 +32,7 @@ import { NewMealComponent } from './components/new-meal/new-meal.component';
 import { NewIngredientComponent } from './components/new-ingredient/new-ingredient.component';
 import {CategoryService} from "./services/category.service";
 import { IngredientInfoComponent } from './components/ingredient-info/ingredient-info.component';
+import { IngredientOrderInfoComponent } from './components/ingredient-order-info/ingredient-order-info.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { IngredientInfoComponent } from './components/ingredient-info/ingredient
     
     NewMealComponent,
     NewIngredientComponent,
-    IngredientInfoComponent
+    IngredientInfoComponent,
+    IngredientOrderInfoComponent
 
   ],
   imports: [
