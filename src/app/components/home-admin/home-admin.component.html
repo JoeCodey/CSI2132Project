@@ -1,7 +1,7 @@
 <nav class="nav navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand">Smart Refrigerator System</a>
+      <a class="navbar-brand" [routerLink]="['food-reports']">Smart Refrigerator System</a>
     </div>
     <ul class="nav navbar-nav navbar-right" *ngIf="isReports()">
       <li class="active"><a>Food Reports</a></li>

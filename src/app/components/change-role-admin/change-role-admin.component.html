@@ -12,23 +12,18 @@
       <th>User Id</th>
       <th>name</th>
       <th>email</th>
-      <th>ROLE</th>
+      <th>Role</th>
+      <th>Actions</th>
     </tr>
-    <!--<tr *ngFor="#user of displayUsers() | keys">-->
-      <!--user: {{user.name}}, {{user.id}}, {{user.role}}-->
-    <!--</tr>-->
     <tr *ngFor="let user of getPaginatedResults()">
       <td>{{user.id}}</td>
       <td>{{user.name}}</td>
       <td>{{user.email}}</td>
       <td>{{user.role}}</td>
-      <td>
-        <button class="btn btn-sm btn-primary " (clik)="makeChef(user)" *ngIf="user.role != 'chef'">Make Chef</button>
-        <button class="btn btn-sm btn-primary" (click)="makeUser(user)" *ngIf="user.role != 'user'">Make User</button>
-        <button class="btn btn-sm btn-primary" (click)="makeAdmin(user)" *ngIf="user.role != 'admin'">Make Admin</button>
-        <!--
-        <input #{{user.id}}  [(ngModel)]="user.selected" type="checkbox" (change)="checkbox(user)">
-        -->
+      <td class="btn-roles">
+        <button class="btn btn-sm btn-primary change-role-btn" (clik)="makeChef(user)" *ngIf="user.role != 'chef'">Make Chef</button>
+        <button class="btn btn-sm btn-primary change-role-btn" (click)="makeUser(user)" *ngIf="user.role != 'user'">Make User</button>
+        <button class="btn btn-sm btn-primary change-role-btn" (click)="makeAdmin(user)" *ngIf="user.role != 'admin'">Make Admin</button>
       </td>
     </tr>
 

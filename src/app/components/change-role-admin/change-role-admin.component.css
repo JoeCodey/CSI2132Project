@@ -6,4 +6,11 @@
   width: 33%;
   text-align: center;
 }
+.change-role-btn{
+  width: 100px;
+}
+.btn-roles button{
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
