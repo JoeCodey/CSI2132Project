@@ -44,7 +44,8 @@ export class ChangeRoleAdminComponent implements OnInit {
     let modifedSeachString = this.searchString.trim().toLocaleLowerCase();
     console.log(modifedSeachString);
     return this.users.filter((user) => {
-        return user.name.trim().toLocaleLowerCase().includes(modifedSeachString);
+        return user.name.trim().toLocaleLowerCase().includes(modifedSeachString) ||
+            user.email.trim().toLowerCase().includes(modifedSeachString);
     });
   }
   public getPaginatedResults(){
