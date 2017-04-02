@@ -10,6 +10,9 @@ import {Router} from "@angular/router";
 })
 export class OrderMealComponent implements OnInit {
   meals : any = [];
+  public searchString : string = '';
+  public itemsPerPage : number = 5;
+  public currentPage : number = 1;
   constructor(private mealsService : MealsService, public authService : AuthService, public parentRouter : Router) {
     let errorHandler = (err) => {
       console.error(err);
@@ -48,7 +51,16 @@ export class OrderMealComponent implements OnInit {
     return this.meals.filter((item) => {return item.selected === true});
   }
   public getDeselectedMeals() : [any]{
-    return this.meals.filter((item) => {return item.selected === false});
+    let modifiedSearchString = this.searchString.trim().toLowerCase();
+    return this.meals.filter((meal) => {
+      if (modifiedSearchString.length == 0){
+        return meal.selected === false;
+      }
+      else {
+        return meal.selected === false && meal.name.trim().toLowerCase().includes(modifiedSearchString) ||
+         meal.selected === false && meal.cuisine.trim().toLowerCase().includes(modifiedSearchString);
+      }
+    });
   }
   public getSelectionCount() : number{
     return this.getSelectedMeals().length;
@@ -76,6 +88,21 @@ export class OrderMealComponent implements OnInit {
       }, err => {console.error(err)});
     }
 
+  }
+  public getPaginatedResults(){
+    let unselectedMeals = this.getDeselectedMeals();
+    let first = (this.currentPage-1) * this.itemsPerPage;
+    let last = (this.currentPage * this.itemsPerPage);
+
+    return unselectedMeals.slice(first, last);
+  }s
+  public totalPageCount(){
+    let val = Math.ceil(this.getDeselectedMeals().length / this.itemsPerPage);
+    let arr = [];
+    for (let i = 1;i<=val;i++){
+      arr.push(i);
+    }
+    return arr;
   }
 
   ngOnInit() {
